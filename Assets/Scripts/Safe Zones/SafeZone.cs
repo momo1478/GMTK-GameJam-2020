@@ -3,14 +3,18 @@ using UnityEngine;
 
 namespace Safe_Zones {
     public class SafeZone : MonoBehaviour {
-        [SerializeField] private readonly float range;
-        public float Range => range;
-        [SerializeField] private GameObject vfx;
         [SerializeField] private Animator animator;
-        public static Action<Collider2D, GameObject> HandleTriggerEnter2D = delegate {  };
+        
+        private bool IsInactive () => animator.GetCurrentAnimatorStateInfo(0).IsName("Inactive");
+        private bool IsActivating () => animator.GetCurrentAnimatorStateInfo(0).IsName("Activating");
+        private bool IsActive () => animator.GetCurrentAnimatorStateInfo(0).IsName("Active");
+        private bool IsClosing () => animator.GetCurrentAnimatorStateInfo(0).IsName("IsClosing");
+        private bool IsClosed () => animator.GetCurrentAnimatorStateInfo(0).IsName("IsClosed");
 
         private void OnTriggerEnter2D(Collider2D other) {
-            HandleTriggerEnter2D(other, gameObject);
+            if (IsActivating() || IsInactive() || IsClosed()) return;
+            
+            if (other.gameObject.GetComponent<Projectile>()) Destroy(other.gameObject);
         }
     }
 }

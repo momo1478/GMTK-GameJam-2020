@@ -6,8 +6,8 @@ namespace Safe_Zones {
     {
         private Transform activator;
         [SerializeField] private float threshold;
-        [SerializeField] private float timeLeft;
         [SerializeField] private float activationTime;
+        private float timeLeft;
         private static readonly int Active = Animator.StringToHash("Active");
         private static readonly int Inactive = Animator.StringToHash("Inactive");
 
