@@ -12,9 +12,7 @@ namespace Objectives {
             ClearedObjectives = new List<Objective>();
             FailedObjectives = new List<Objective>();
             var ob = gameObject.AddComponent<MoveToArea>();
-            var ob1 = gameObject.AddComponent<MoveToArea>();
             AddObjective(ob);
-            AddObjective(ob1);
         }
 
         private void Update() {
@@ -57,9 +55,9 @@ namespace Objectives {
         public void AddObjective(Objective t) => Objectives.Add(t);
 
         public void RemoveObjective(Objective t) {
-            t.Cleanup();
             Objectives.Remove(t);
-            Destroy(t);
+            t.Cleanup();
+            if (t) Destroy(t);
         }
     }
 }
