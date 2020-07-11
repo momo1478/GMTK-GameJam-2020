@@ -13,6 +13,7 @@ namespace Safe_Zones {
         private float lerpDuration = .75f;
         private ParticleSystem particleSystem;
         [SerializeField] private GameObject particleSystemObject;
+        private float minColliderRadius;
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex,
             AnimatorControllerPlayable controller) {
@@ -23,6 +24,8 @@ namespace Safe_Zones {
                        throw new Exception($"Unable to assign colider2d in {name}");
             var go = Instantiate(particleSystemObject, animator.gameObject.transform);
             go.transform.localPosition = Vector3.zero;
+
+            minColliderRadius = collider.radius;
             
             particleSystem = go.GetComponent<ParticleSystem>() ??
                              throw new Exception($"Unable to assign particle system in {name}");
@@ -43,7 +46,7 @@ namespace Safe_Zones {
         private void HandleColliderLerp() {
             lerpTimeLeft = Mathf.Clamp(lerpTimeLeft - Time.deltaTime, 0, lerpDuration);
             var lerpFrac = (lerpDuration - lerpTimeLeft) / lerpDuration;
-            collider.radius = Mathf.Lerp(collider.radius, range, lerpFrac);
+            collider.radius = Mathf.Lerp(minColliderRadius, range, lerpFrac);
         }
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
