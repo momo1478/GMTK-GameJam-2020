@@ -12,9 +12,12 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
-
-        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync((int)SceneIndices.TITLE_SCREEN, LoadSceneMode.Additive);        
+        if (instance != null && instance != this) {
+            Destroy(gameObject);
+        } else {
+            instance = this;
+            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync((int)SceneIndices.TITLE_SCREEN, LoadSceneMode.Additive);        
+        }
     }
 
     List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
