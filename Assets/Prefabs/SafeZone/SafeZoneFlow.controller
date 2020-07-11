@@ -150,9 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f5c7a4bb964c8458af502bd41a0e9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeDuration: 6
+  activeDuration: 2
   range: 5
-  lerpDuration: 0.75
   particleSystemObject: {fileID: 5837763131287355104, guid: 18a38ddcca8a2b4418ab0c00932c2975,
     type: 3}
 --- !u!114 &-1303839068665165970
@@ -369,7 +368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e7e0ea067068e04eb1cd95766bc14f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeDuration: 3
+  activeDuration: 7
 --- !u!1102 &7611354747242990758
 AnimatorState:
   serializedVersion: 5

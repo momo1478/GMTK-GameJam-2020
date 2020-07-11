@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a4c52b501504b1f85ef05682f80d851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vfx: {fileID: 5837763131287355104, guid: 18a38ddcca8a2b4418ab0c00932c2975, type: 3}
   animator: {fileID: 824679435281684621}
+  collider2D: {fileID: 824679435281684617}
 --- !u!95 &824679435281684621
 Animator:
   serializedVersion: 3

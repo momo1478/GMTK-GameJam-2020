@@ -10,13 +10,14 @@ namespace Safe_Zones {
         [SerializeField] private float range;
         private CircleCollider2D collider;
         private float lerpTimeLeft;
-        [SerializeField] private float lerpDuration = .75f;
+        private float lerpDuration = .75f;
         private ParticleSystem particleSystem;
         [SerializeField] private GameObject particleSystemObject;
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex,
             AnimatorControllerPlayable controller) {
             stateTimeLeft = activeDuration;
+            lerpDuration = activeDuration;
             lerpTimeLeft = lerpDuration;
             collider = animator.gameObject.GetComponent<CircleCollider2D>() ??
                        throw new Exception($"Unable to assign colider2d in {name}");
@@ -41,7 +42,8 @@ namespace Safe_Zones {
 
         private void HandleColliderLerp() {
             lerpTimeLeft = Mathf.Clamp(lerpTimeLeft - Time.deltaTime, 0, lerpDuration);
-            collider.radius = Mathf.Lerp(collider.radius, range, lerpTimeLeft);
+            var lerpFrac = (lerpDuration - lerpTimeLeft) / lerpDuration;
+            collider.radius = Mathf.Lerp(collider.radius, range, lerpFrac);
         }
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
