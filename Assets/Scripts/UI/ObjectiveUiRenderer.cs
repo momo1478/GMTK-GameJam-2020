@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Tasks;
+using Objectives;
 using UnityEngine;
 
 public class ObjectiveUiRenderer : MonoBehaviour {
