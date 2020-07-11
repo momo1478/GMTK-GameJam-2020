@@ -8,16 +8,20 @@ public class Emitter : MonoBehaviour
 
     public float spawnRate = 50;    // proj/sec
     public float rotationRate = 100;  // degree/sec
-    public float speed = 5;
+    public float projectileSpeed = 5;
 
     public float angle = 0f;
     public float angleSpray = 45f;
+
+    // Pulse
+    public float pulseSize = 10;
 
     public enum Behavior
     {
         Spin,
         Random,
-        Oscillate
+        Oscillate,
+        Pulse
     }
 
     public Behavior behavior = Behavior.Spin;
@@ -40,20 +44,31 @@ public class Emitter : MonoBehaviour
 
     public void SpawnBullet()
     {
-        Projectile clone = Instantiate(projectile, transform.position, transform.rotation);
+        Projectile clone;
         switch (behavior)
         {
             case Behavior.Spin:
+                clone = Instantiate(projectile, transform.position, transform.rotation);
                 float spinOffset = Time.time * rotationRate % 360f;
-                clone.data = new Projectile.ProjectileData(GetVelocity(speed, spinOffset));
+                clone.data = new Projectile.ProjectileData(GetVelocity(projectileSpeed, spinOffset));
                 break;
             case Behavior.Oscillate:
+                clone = Instantiate(projectile, transform.position, transform.rotation);
                 float offset =  Mathf.PingPong(Time.time * rotationRate, angleSpray);
-                clone.data = new Projectile.ProjectileData(GetVelocity(speed, angle - angleSpray/2 + offset));
+                clone.data = new Projectile.ProjectileData(GetVelocity(projectileSpeed, angle - angleSpray/2 + offset));
+                break;
+            case Behavior.Pulse:
+                for (int i = 0; i < pulseSize + 1; i++)
+                {
+                    clone = Instantiate(projectile, transform.position, transform.rotation);
+                    float curAngle = angleSpray / pulseSize * i;
+                    clone.data = new Projectile.ProjectileData(GetVelocity(projectileSpeed, angle - angleSpray/2 + curAngle));
+                }
                 break;
             case Behavior.Random:
+                clone = Instantiate(projectile, transform.position, transform.rotation);
                 float ranAngle = Random.Range(angle - angleSpray/2, angle + angleSpray/2);
-                clone.data = new Projectile.ProjectileData(GetVelocity(speed, ranAngle));
+                clone.data = new Projectile.ProjectileData(GetVelocity(projectileSpeed, ranAngle));
                 break;
             default:
                 break;
