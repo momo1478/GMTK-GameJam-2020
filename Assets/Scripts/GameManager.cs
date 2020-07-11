@@ -1,62 +1,62 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public GameObject loadingScreen;
-    public ProgressBar progressBar;
-    public float minimumLoadScreenTimeSeconds = 1;
+
+    [Header("Starting Stats")]
+    public int StartingHealth = 25; 
+
+    private int health;
+
+    private Coroutine gameOver;
 
     private void Awake()
     {
-        if (instance == null)
+        if (instance != null && instance != this)
+        {
+            Destroy(this);
+        }
+        else
         {
             instance = this;
-            SceneManager.LoadSceneAsync((int)SceneIndices.TITLE_SCREEN, LoadSceneMode.Additive);        
-        } else {
-            Destroy(gameObject);
         }
     }
-
-    List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
-    public void LoadGame()
+    // Start is called before the first frame update
+    void Start()
     {
-        loadingScreen.gameObject.SetActive(true);
-        scenesLoading.Add(SceneManager.UnloadSceneAsync((int)SceneIndices.TITLE_SCREEN));
-        scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndices.GAME, LoadSceneMode.Additive));
-
-        StartCoroutine(GetSceneLoadProgress());
+        health = StartingHealth;        
     }
 
-    public IEnumerator GetSceneLoadProgress()
+    public void Damage(int amount)
     {
-        float totalLoadingProgress = 0;
+        health -= amount;
+        print($"(-) Health : {health}");
+    }
 
-        float startTime = Time.time;
+    public void Heal(int amount)
+    {
+        health += amount;
+        print($"(+) Health : {health}");
+    }
 
-        foreach (AsyncOperation operation in scenesLoading) {
-            while (!operation.isDone) {                
-                totalLoadingProgress = 0;
-                foreach (AsyncOperation operation1 in scenesLoading) {
-                    totalLoadingProgress += operation1.progress / scenesLoading.Count;
-                }
-                
-                progressBar.SetCurrent(totalLoadingProgress * progressBar.maximum);
-                yield return null;
-            }
-        }
-
-        progressBar.SetCurrent(progressBar.maximum);
-
-        float loadTimeSeconds = Time.time - startTime;
-        if (loadTimeSeconds < minimumLoadScreenTimeSeconds)
+    // Update is called once per frame
+    void Update()
+    {
+        if (health <= 0 && gameOver == null)
         {
-            yield return new WaitForSecondsRealtime(minimumLoadScreenTimeSeconds - loadTimeSeconds);
+            gameOver = StartCoroutine(GameOver());
         }
-        
-        loadingScreen.gameObject.SetActive(false);
+    }
+
+    IEnumerator GameOver()
+    {
+        print("hAhA u LoSe!1!");
+        Time.timeScale = 0.5f;
+        yield return new WaitForSecondsRealtime(3f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1f;
     }
 }
