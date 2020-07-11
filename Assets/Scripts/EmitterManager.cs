@@ -20,7 +20,7 @@ public class EmitterManager : MonoBehaviour
     {
         foreach (var emitter in emitters)
         {
-            emitter.speed = globalSpeed;
+            emitter.projectileSpeed = globalSpeed;
             emitter.spawnRate = globalRate;
             emitter.behavior = globalBehavior;
         }
