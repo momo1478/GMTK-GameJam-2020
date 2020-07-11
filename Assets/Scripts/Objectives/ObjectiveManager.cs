@@ -9,6 +9,8 @@ namespace Tasks {
         private void Awake() {
             Objectives = new List<Objective>();
             ClearedObjectives = new List<Objective>();
+            var ob = gameObject.AddComponent<MoveToArea>();
+            AddObjective(ob);
         }
 
         private void Update() {
@@ -32,8 +34,8 @@ namespace Tasks {
             }
         }
 
-        public void AddTask(Objective t) => Objectives.Add(t);
+        public void AddObjective(Objective t) => Objectives.Add(t);
 
-        public void RemoveTask(Objective t) => ClearedObjectives.Add(t);
+        public void RemoveObjective(Objective t) => ClearedObjectives.Add(t);
     }
 }

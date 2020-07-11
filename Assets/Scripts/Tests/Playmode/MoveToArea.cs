@@ -24,7 +24,7 @@ namespace Tests
             GameObject managerObj = new GameObject();
             var manager = managerObj.AddComponent<ObjectiveManager>();
             var objective = managerObj.AddComponent<MoveToArea>();
-            manager.AddTask(objective);
+            manager.AddObjective(objective);
             managerObj.transform.position = Vector3.zero;
             
             Assert.IsFalse(objective.IsCompleted());
