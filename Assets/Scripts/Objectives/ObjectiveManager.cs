@@ -55,9 +55,9 @@ namespace Objectives {
         public void AddObjective(Objective t) => Objectives.Add(t);
 
         public void RemoveObjective(Objective t) {
-            t.Cleanup();
             Objectives.Remove(t);
-            Destroy(t);
+            t.Cleanup();
+            if (t) Destroy(t);
         }
     }
 }
