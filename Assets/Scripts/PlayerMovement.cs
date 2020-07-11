@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            // TODO: Cooldown for dash
             StartCoroutine(HandleDashMultiplier());
         }
     }
