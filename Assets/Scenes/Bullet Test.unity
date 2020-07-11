@@ -367,6 +367,21 @@ PrefabInstance:
       propertyPath: spawnRate
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1769864326492681693, guid: 41d589c75713add43b5f30c0d5790a12,
+        type: 3}
+      propertyPath: behavior
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1769864326492681693, guid: 41d589c75713add43b5f30c0d5790a12,
+        type: 3}
+      propertyPath: minAngle
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 1769864326492681693, guid: 41d589c75713add43b5f30c0d5790a12,
+        type: 3}
+      propertyPath: maxAngle
+      value: 540
+      objectReference: {fileID: 0}
     - target: {fileID: 1769864326492681694, guid: 41d589c75713add43b5f30c0d5790a12,
         type: 3}
       propertyPath: m_SortingOrder
@@ -535,6 +550,21 @@ PrefabInstance:
       propertyPath: spawnRate
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1769864326492681693, guid: 41d589c75713add43b5f30c0d5790a12,
+        type: 3}
+      propertyPath: minAngle
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 1769864326492681693, guid: 41d589c75713add43b5f30c0d5790a12,
+        type: 3}
+      propertyPath: maxAngle
+      value: 450
+      objectReference: {fileID: 0}
+    - target: {fileID: 1769864326492681693, guid: 41d589c75713add43b5f30c0d5790a12,
+        type: 3}
+      propertyPath: behavior
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1769864326492681694, guid: 41d589c75713add43b5f30c0d5790a12,
         type: 3}
       propertyPath: m_SortingOrder
@@ -647,6 +677,21 @@ PrefabInstance:
         type: 3}
       propertyPath: spawnRate
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1769864326492681693, guid: 41d589c75713add43b5f30c0d5790a12,
+        type: 3}
+      propertyPath: minAngle
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1769864326492681693, guid: 41d589c75713add43b5f30c0d5790a12,
+        type: 3}
+      propertyPath: maxAngle
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 1769864326492681693, guid: 41d589c75713add43b5f30c0d5790a12,
+        type: 3}
+      propertyPath: behavior
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1769864326492681694, guid: 41d589c75713add43b5f30c0d5790a12,
         type: 3}
@@ -839,6 +884,11 @@ PrefabInstance:
         type: 3}
       propertyPath: maxAngle
       value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 1769864326492681693, guid: 41d589c75713add43b5f30c0d5790a12,
+        type: 3}
+      propertyPath: behavior
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1769864326492681694, guid: 41d589c75713add43b5f30c0d5790a12,
         type: 3}
