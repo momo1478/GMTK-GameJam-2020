@@ -1,18 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class Emitter : MonoBehaviour
 {
 
-    public float rate = 10;
+    public float spawnRate = 50;    // proj/sec
+    public float rotationRate = 100;  // degree/sec
     public float speed = 5;
 
     public bool randomAngle = true;
     public float minAngle = 0f;
     public float maxAngle = 360f;
 
-    public Pool pool;
+    public enum Behavior
+    {
+        Spin,
+        Random,
+        Oscillate
+    }
+
+    public Behavior behavior = Behavior.Spin;
 
     public Projectile projectile;
 
@@ -33,14 +42,29 @@ public class Emitter : MonoBehaviour
     public void SpawnBullet()
     {
         Projectile clone = Instantiate(projectile, transform.position, transform.rotation);
-        float angle = Random.Range(minAngle, maxAngle);
-        clone.data = new Projectile.ProjectileData(GetVelocity(speed, angle));
+        switch (behavior)
+        {
+            case Behavior.Spin:
+                float spinOffset = Time.time * rotationRate % 360f;
+                clone.data = new Projectile.ProjectileData(GetVelocity(speed, spinOffset));
+                break;
+            case Behavior.Oscillate:
+                float offset =  Mathf.PingPong(Time.time * rotationRate, maxAngle - minAngle);
+                clone.data = new Projectile.ProjectileData(GetVelocity(speed, minAngle + offset));
+                break;
+            case Behavior.Random:
+                float angle = Random.Range(minAngle, maxAngle);
+                clone.data = new Projectile.ProjectileData(GetVelocity(speed, angle));
+                break;
+            default:
+                break;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (tillNextAction > 1.0f/rate)
+        if (tillNextAction > 1.0f / spawnRate)
         {
             SpawnBullet();
             tillNextAction = 0f;

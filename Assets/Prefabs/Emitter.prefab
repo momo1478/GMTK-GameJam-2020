@@ -94,11 +94,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9271235d62c30ee49b434062dd6dbac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rate: 1
+  spawnRate: 50
+  rotationRate: 100
   speed: 5
   randomAngle: 1
   minAngle: 0
   maxAngle: 360
+  behavior: 0
   projectile: {fileID: 1530083611826787186, guid: 0fa145c68318f6d4b8d840a1c5644a22,
     type: 3}
-  tillNextAction: 0
