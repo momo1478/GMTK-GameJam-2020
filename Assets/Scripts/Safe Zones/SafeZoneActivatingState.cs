@@ -22,7 +22,11 @@ namespace Safe_Zones {
             if (ShouldEnterInactive(animator.gameObject.transform.position)) animator.SetTrigger(Inactive);
             if (ShouldEnterActive()) animator.SetTrigger(Active);
         }
-    
+
+        public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+            animator.ResetTrigger(Active);
+        }
+
         private bool ShouldEnterActive() {
             timeLeft = Mathf.Clamp(timeLeft - Time.deltaTime, 0, activationTime);
             return timeLeft <= 0;;

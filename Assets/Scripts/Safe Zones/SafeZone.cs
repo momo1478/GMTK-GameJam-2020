@@ -7,15 +7,10 @@ namespace Safe_Zones {
         public float Range => range;
         [SerializeField] private GameObject vfx;
         [SerializeField] private Animator animator;
-        
-        private void Update() {
-            // print($"Inactive: {animator.GetCurrentAnimatorStateInfo(0).IsName("Inactive")}");
-            // print($"Activating: {animator.GetCurrentAnimatorStateInfo(0).IsName("Activating")}");
-            // print($"Active: {animator.GetCurrentAnimatorStateInfo(0).IsName("Active")}");
-        }
+        public static Action<Collider2D, GameObject> HandleTriggerEnter2D = delegate {  };
 
         private void OnTriggerEnter2D(Collider2D other) {
-            print("Enter2D");
+            HandleTriggerEnter2D(other, gameObject);
         }
     }
 }
