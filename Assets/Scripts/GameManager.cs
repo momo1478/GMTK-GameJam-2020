@@ -12,9 +12,13 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
-
-        SceneManager.LoadSceneAsync((int)SceneIndices.TITLE_SCREEN, LoadSceneMode.Additive);        
+        if (instance == null)
+        {
+            instance = this;
+            SceneManager.LoadSceneAsync((int)SceneIndices.TITLE_SCREEN, LoadSceneMode.Additive);        
+        } else {
+            Destroy(gameObject);
+        }
     }
 
     List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
