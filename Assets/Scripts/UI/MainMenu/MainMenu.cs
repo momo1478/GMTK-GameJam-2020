@@ -5,7 +5,7 @@ using UnityEngine;
 public class MainMenu : MonoBehaviour
 {
     public void OnPlayClicked() {
-        FindObjectOfType<GameManager>().LoadGame();
+        FindObjectOfType<LevelManager>().LoadGame();
     }
 
     public void OnExitClicked() {
