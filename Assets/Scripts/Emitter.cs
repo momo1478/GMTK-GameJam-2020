@@ -10,9 +10,8 @@ public class Emitter : MonoBehaviour
     public float rotationRate = 100;  // degree/sec
     public float speed = 5;
 
-    public bool randomAngle = true;
-    public float minAngle = 0f;
-    public float maxAngle = 360f;
+    public float angle = 0f;
+    public float angleSpray = 45f;
 
     public enum Behavior
     {
@@ -49,12 +48,12 @@ public class Emitter : MonoBehaviour
                 clone.data = new Projectile.ProjectileData(GetVelocity(speed, spinOffset));
                 break;
             case Behavior.Oscillate:
-                float offset =  Mathf.PingPong(Time.time * rotationRate, maxAngle - minAngle);
-                clone.data = new Projectile.ProjectileData(GetVelocity(speed, minAngle + offset));
+                float offset =  Mathf.PingPong(Time.time * rotationRate, angleSpray);
+                clone.data = new Projectile.ProjectileData(GetVelocity(speed, angle - angleSpray/2 + offset));
                 break;
             case Behavior.Random:
-                float angle = Random.Range(minAngle, maxAngle);
-                clone.data = new Projectile.ProjectileData(GetVelocity(speed, angle));
+                float ranAngle = Random.Range(angle - angleSpray/2, angle + angleSpray/2);
+                clone.data = new Projectile.ProjectileData(GetVelocity(speed, ranAngle));
                 break;
             default:
                 break;
