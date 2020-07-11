@@ -29,7 +29,7 @@ namespace Safe_Zones {
 
         private bool ShouldEnterActive() {
             timeLeft = Mathf.Clamp(timeLeft - Time.deltaTime, 0, activationTime);
-            return timeLeft <= 0;;
+            return timeLeft <= 0;
         }
     
         private bool TooFar(Vector3 thisPos) => Vector3.Distance(activator.position, thisPos) > threshold;

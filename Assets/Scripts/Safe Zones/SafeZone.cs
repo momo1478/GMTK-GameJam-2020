@@ -16,5 +16,11 @@ namespace Safe_Zones {
             
             if (other.gameObject.GetComponent<Projectile>()) Destroy(other.gameObject);
         }
+
+        private void OnTriggerStay2D(Collider2D other) {
+            if (IsActivating() || IsInactive() || IsClosed()) return;
+
+            if (other.gameObject.GetComponent<Projectile>()) Destroy(other.gameObject);
+        }
     }
 }
