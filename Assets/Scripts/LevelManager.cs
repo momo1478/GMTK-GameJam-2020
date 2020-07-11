@@ -30,6 +30,15 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(GetSceneLoadProgress());
     }
 
+    public void LoadMainMenu()
+    {
+        loadingScreen.gameObject.SetActive(true);
+        scenesLoading.Add(UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync((int)SceneIndices.GAME));
+        scenesLoading.Add(UnityEngine.SceneManagement.SceneManager.LoadSceneAsync((int)SceneIndices.TITLE_SCREEN, LoadSceneMode.Additive));
+
+        StartCoroutine(GetSceneLoadProgress());
+    }
+
     public IEnumerator GetSceneLoadProgress()
     {
         float totalLoadingProgress = 0;
@@ -57,5 +66,6 @@ public class LevelManager : MonoBehaviour
         }
         
         loadingScreen.gameObject.SetActive(false);
+        scenesLoading.Clear();
     }
 }
