@@ -22,9 +22,5 @@ namespace Safe_Zones {
 
             if (other.gameObject.GetComponent<Projectile>()) Destroy(other.gameObject);
         }
-
-        private void OnGUI() {
-            GUILayout.Box($"Collider: {collider2D.radius}");
-        }
     }
 }
