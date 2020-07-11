@@ -6,9 +6,9 @@ namespace Objectives {
         [SerializeField] private Sprite arrowSprite;
         [SerializeField] private GameObject pointerPrefab;
         private RectTransform pointerTransform;
-        [SerializeField] private float border = 100f;
         private Vector3 pointerWorldPos;
         private object debugPos;
+        private object debugPos2;
 
         private void Start() {
             var canvas = FindObjectOfType<Canvas>();
@@ -20,28 +20,16 @@ namespace Objectives {
             fromPos.z = 0;
             var targetPositionScreenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
 
-            if (IsOffScreen(targetPositionScreenPoint)) HandleOffscreen(targetPositionScreenPoint);
-            else HandleOnScreen(targetPositionScreenPoint);
-
+            pointerTransform.position  = HandleOffscreen(targetPositionScreenPoint);
         }
 
-        private bool IsOffScreen(Vector3 targetPositionScreenPoint) {
+        private Vector3 HandleOffscreen(Vector3 targetPositionScreenPoint) {
             var rect = pointerTransform.rect;
-            debugPos = targetPositionScreenPoint.x;
-            return targetPositionScreenPoint.x - (rect.width  / 2) <= 0 ||
-                   targetPositionScreenPoint.x + (rect.width  / 2) >= Screen.width ||
-                   targetPositionScreenPoint.y - (rect.height / 2) <= 0 ||
-                   targetPositionScreenPoint.y + (rect.height / 2) >= Screen.height;
+            var clampedX = Mathf.Clamp(targetPositionScreenPoint.x, 0 + (rect.width / 2), Screen.width - (rect.width / 2));
+            var clampedY = Mathf.Clamp(targetPositionScreenPoint.y, 0 + (rect.height / 2), Screen.height - (rect.height / 2));
+            return new Vector3(clampedX, clampedY, 0);
         }
-
-        private void HandleOffscreen(Vector3 targetPositionScreenPoint) {
-            pointerTransform.localPosition = targetPositionScreenPoint;
-        }
-        private void HandleOnScreen(Vector3 targetPositionScreenPoint) => pointerTransform.position = targetPositionScreenPoint;
-
-        private void OnGUI() {GUILayout.Box($"{debugPos}");
-        }
-
+        
         public void Cleanup() {
             if (pointerTransform) Destroy(pointerTransform.gameObject);
             Destroy(gameObject);
