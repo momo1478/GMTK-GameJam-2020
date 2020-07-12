@@ -15,15 +15,13 @@ namespace Objectives {
 
         public abstract void Failed();
 
-        public void DisplayText(string text, Vector3 location)
+        public void DisplayText(string text, Vector3 location, int textSize = 180)
         {
-            GameObject gameObject = Instantiate(Resources.Load("Prefabs/TextOnSpot")) as GameObject;
-            if(gameObject.GetComponent<TextOnSpot>() != null) {
-                
-                var tos = gameObject.GetComponent<TextOnSpot>();
-                tos.DisplayText = text;
-            }
-            gameObject.transform.position = location;
+            GameObject go = Instantiate(Resources.Load("Prefabs/TextOnSpot")) as GameObject;
+            var tos = go.GetComponent<TextOnSpot>();
+            tos.TextPrefab.text = text;
+            tos.SetFontSize(textSize);
+            go.transform.position = location;
         }
     }
 }

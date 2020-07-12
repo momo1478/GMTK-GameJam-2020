@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class TextOnSpot : MonoBehaviour {
 
@@ -12,27 +13,28 @@ public class TextOnSpot : MonoBehaviour {
 	public float DestroyAfter;
 	private float Timer;
 
+	private int textSize = 180;
+
 	// Use this for initialization
 	void Start () {
 		Timer = DestroyAfter;
-		TextPrefab = GetComponentInChildren<TextMeshProUGUI>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		TextPrefab.fontSize = textSize;
 		Timer -= Time.deltaTime;
 		if(Timer < 0) {
 			Destroy(gameObject);
-		}
-
-		if(DisplayPoints > 0) {
-			TextPrefab.text = "+" + DisplayPoints + "!";
-		} else if(DisplayText != null) {
-			TextPrefab.text = DisplayText;
 		}
 
 		if(Speed > 0) {
 			transform.Translate(Vector3.up * Speed * Time.deltaTime, Space.World);
 		}
 	}
+
+    public void SetFontSize(int textSize)
+    {
+        this.textSize = textSize;
+    }
 }
