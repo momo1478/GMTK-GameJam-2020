@@ -38,6 +38,6 @@ public class LoseUI : MonoBehaviour
 
     public void OnRetryClick()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("Main");
     }
 }
