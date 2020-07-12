@@ -6,7 +6,7 @@ namespace Objectives {
     public class MoveToArea : Objective {
         private Transform playerTr;
         private Transform targetTr;
-        private float range = 10f;
+        private float range = 3f;
         private float threshold;
         [SerializeField] private GameObject targetPrefab;
         private float timeLeft;
@@ -18,7 +18,7 @@ namespace Objectives {
             if (targetPrefab == null) targetPrefab = Resources.Load<GameObject>("MoveToTarget");
             targetTr = Instantiate(targetPrefab, new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), 0),
                 Quaternion.identity).transform;
-            targetTr.localScale *= range;
+            targetTr.localScale *= Random.Range(range/2f, range);
             threshold = range / 2;
             timeLeft = timeToComplete;
         }
@@ -38,11 +38,13 @@ namespace Objectives {
 
         public override void Completed() {
             // TODO: Increment score
+            Manager.AddObjective(gameObject.AddComponent<MoveToArea>());
+            GameManager.AddScore(scoreReward);
             DisplayText($"+{scoreReward}", targetTr.position);
         }
 
         public override void Failed() {
-            // game.Harder();
+            GameManager.instance.Damage(5);
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Objectives {
     public abstract class Objective : MonoBehaviour {
         protected ObjectiveManager Manager;
 
-        public int scoreReward = 100;
+        public int scoreReward = 10;
 
         public abstract bool IsCompleted();
         public abstract void Cleanup();

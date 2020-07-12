@@ -12,12 +12,14 @@ namespace Objectives {
 
         protected override void Start() {
             base.Start();
+            scoreReward = scoreReward * 2;
             playerTr = FindObjectOfType<PlayerMovement>().transform;
             StartCoroutine(SpawnLasers());
         }
 
         public override void Completed() {
             DisplayText($"+{scoreReward}", playerTr.transform.position);
+            GameManager.AddScore(scoreReward);
         }
 
         public IEnumerator SpawnLasers()

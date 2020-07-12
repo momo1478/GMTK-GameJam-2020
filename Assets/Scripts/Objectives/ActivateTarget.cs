@@ -6,13 +6,14 @@ namespace Objectives {
     public class ActivateTarget : Objective {
         private float timeLeft;
         [SerializeField] private float timeToComplete = 10f;
-        [SerializeField] private float maxCharge = 3f;
+        [SerializeField] private float maxCharge = 1.5f;
         private ChargeStation chargeStation;
 
         private void Start() {
+            Manager = GetComponent<ObjectiveManager>();
             chargeStation = Instantiate(Resources.Load<ChargeStation>("ChargeStation"),
                 new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), 0), Quaternion.identity);
-            var scale = Random.Range(2, 10);
+            var scale = Random.Range(5, 15);
             chargeStation.transform.localScale *= scale;
             chargeStation.AssignObjective(maxCharge);
             timeLeft = timeToComplete;
@@ -31,8 +32,15 @@ namespace Objectives {
 
         public override bool IsFailed() => timeLeft <= 0;
 
-        public override void Completed() { }
+        public override void Completed()
+        {
+            Manager.AddObjective(gameObject.AddComponent<ActivateTarget>());
+            GameManager.AddScore(scoreReward);
+        }
 
-        public override void Failed() { }
+        public override void Failed()
+        {
+            GameManager.instance.Damage(5);
+        }
     }
 }

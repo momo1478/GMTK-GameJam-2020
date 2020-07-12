@@ -9,11 +9,12 @@ public class ObjectiveStacker : MonoBehaviour
     public enum Objectives
     {
         MoveToArea,
-        ActivateTarget
+        ActivateTarget,
+        SurviveLasers
     }
 
     [HideInInspector] public ObjectiveManager objectiveManager;
-    public float TimeToNextObjective = 15f;
+    public float TimeToNextObjective;
 
     private float timer = 0f;
     // Start is called before the first frame update
@@ -41,11 +42,13 @@ public class ObjectiveStacker : MonoBehaviour
         switch (randomObjective)
         {
             case Objectives.MoveToArea:
-                print(randomObjective.ToString());
                 objectiveManager.AddObjective(gameObject.AddComponent<MoveToArea>());
                 break;
             case Objectives.ActivateTarget:
                 objectiveManager.AddObjective(gameObject.AddComponent<ActivateTarget>());
+                break;
+            case Objectives.SurviveLasers:
+                objectiveManager.AddObjective(gameObject.AddComponent<SurviveLasers>());
                 break;
         }
     }

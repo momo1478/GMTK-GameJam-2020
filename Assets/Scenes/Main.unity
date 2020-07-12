@@ -357,7 +357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectiveManager: {fileID: 0}
-  TimeToNextObjective: 5
+  TimeToNextObjective: 15
 --- !u!4 &348334579 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1769864326492681695, guid: 41d589c75713add43b5f30c0d5790a12,
@@ -1002,6 +1002,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4058519990541697514, guid: 6c91fcd6aa6750b4e897199fad618812,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4058519990541697515, guid: 6c91fcd6aa6750b4e897199fad618812,
         type: 3}
       propertyPath: m_Name
@@ -1336,6 +1341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingHealth: 25
+  score: 0
 --- !u!4 &1422806342 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1769864326492681695, guid: 41d589c75713add43b5f30c0d5790a12,

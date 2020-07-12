@@ -15,8 +15,6 @@ public class GameManager : MonoBehaviour
     private int health;
     public float score;
 
-   
-
     public Coroutine gameOver = null;
 
     private void Awake()
@@ -82,5 +80,7 @@ public class GameManager : MonoBehaviour
     public static void ResetGame()
     {
         instance.gameOver = null;
+        instance.health = 0;
+        instance.score = 0;
     }
 }
