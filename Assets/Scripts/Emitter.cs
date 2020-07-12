@@ -86,7 +86,12 @@ public class Emitter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (tillNextAction > 1.0f / spawnRate)
+        float localRate = spawnRate;
+        if (behavior == Behavior.Pulse)
+        {
+            localRate = localRate / pulseSize;
+        }
+        if (tillNextAction > 1.0f / localRate)
         {
             SpawnBullet();
             tillNextAction = 0f;
