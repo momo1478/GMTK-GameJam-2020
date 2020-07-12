@@ -13,9 +13,11 @@ public class GameManager : MonoBehaviour
     public int StartingHealth = 25; 
 
     private int health;
-    private int score;
+    public float score;
 
-    private Coroutine gameOver;
+   
+
+    public Coroutine gameOver = null;
 
     private void Awake()
     {
@@ -58,10 +60,27 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameOver()
     {
-        print("hAhA u LoSe!1!");
         Time.timeScale = 0.5f;
         yield return new WaitForSecondsRealtime(3f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        Time.timeScale = 1f;
+        Time.timeScale = 0f;
+        Instantiate(
+            Resources.Load<LoseUI>("UI/LoseUI"),
+            GameObject.Find("Canvas").GetComponent<Transform>()
+        );
+    }
+
+    public static int GetScore()
+    {
+        return (int) instance.score;
+    }
+
+    public static void AddScore(float rate)
+    {
+        instance.score += rate;
+    }
+
+    public static void ResetGame()
+    {
+        instance.gameOver = null;
     }
 }
