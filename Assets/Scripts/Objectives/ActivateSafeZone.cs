@@ -35,8 +35,6 @@ namespace Objectives {
         }
 
         public override void Failed() {
-            print("failed");
-            GameManager.instance.Damage(5);
         }
     }
 }
