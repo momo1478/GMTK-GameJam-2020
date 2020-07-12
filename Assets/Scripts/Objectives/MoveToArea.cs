@@ -27,7 +27,9 @@ namespace Objectives {
         public override bool IsFailed() => false;
         public override void Completed() {
             // player health += 2
-            
+            // Score Increment
+            DisplayText($"+{scoreReward}", targetTr.position);
+            // TODO: add score to total
             // Manager.AddObjective(gameObject.AddComponent<MoveToArea>());
         }
 
