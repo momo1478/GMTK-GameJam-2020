@@ -51,7 +51,7 @@ public class Laser : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            GameManager.instance.Damage(2);
+            GameManager.instance.Damage(1);
         }
     }
 }

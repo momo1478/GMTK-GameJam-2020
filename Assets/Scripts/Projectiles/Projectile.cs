@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,7 +25,18 @@ public class Projectile : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         // For now?
-        Destroy(this.gameObject, destroyAfterSeconds);
+        StartCoroutine(DestroyOutsideofBounds());
+    }
+
+    private IEnumerator DestroyOutsideofBounds()
+    {
+        float duration = 0f;
+        while(duration < destroyAfterSeconds && new Rect(-50, -50, 100, 100).Contains(gameObject.transform.position))
+        {
+            duration += 1;
+            yield return new WaitForSeconds(1f);
+        }
+        Destroy(gameObject);
     }
 
 
@@ -40,6 +52,10 @@ public class Projectile : MonoBehaviour
         {
             rb.velocity = data.Value.velocity;
         }
-        
+        if (transform.position.x > 50 || transform.position.x < -50 ||
+            transform.position.y > 50 || transform.position.y < -50 )
+        {
+
+        }
     }
 }
