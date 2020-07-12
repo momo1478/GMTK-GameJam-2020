@@ -16,12 +16,15 @@ public class Emitter : MonoBehaviour
     // Pulse
     public float pulseSize = 10;
 
+    private GameObject player;
+
     public enum Behavior
     {
         Spin,
         Random,
         Oscillate,
-        Pulse
+        Pulse,
+        Aimed
     }
 
     public Behavior behavior = Behavior.Spin;
@@ -33,10 +36,10 @@ public class Emitter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    public Vector3 GetVelocity(float speed, float degree)
+    public static Vector3 GetVelocity(float speed, float degree)
     {
         float radians = degree * (Mathf.PI / 180);
         return new Vector3(Mathf.Cos(radians), Mathf.Sin(radians), 0) * speed;
@@ -58,7 +61,7 @@ public class Emitter : MonoBehaviour
                 clone.data = new Projectile.ProjectileData(GetVelocity(projectileSpeed, angle - angleSpray/2 + offset));
                 break;
             case Behavior.Pulse:
-                for (int i = 0; i < pulseSize + 1; i++)
+                for (int i = 0; i < pulseSize; i++)
                 {
                     clone = Instantiate(projectile, transform.position, transform.rotation);
                     float curAngle = angleSpray / pulseSize * i;
@@ -69,6 +72,11 @@ public class Emitter : MonoBehaviour
                 clone = Instantiate(projectile, transform.position, transform.rotation);
                 float ranAngle = Random.Range(angle - angleSpray/2, angle + angleSpray/2);
                 clone.data = new Projectile.ProjectileData(GetVelocity(projectileSpeed, ranAngle));
+                break;
+            case Behavior.Aimed:
+                clone = Instantiate(projectile, transform.position, transform.rotation);
+                var aimedVector = (Vector2)transform.position - ((Vector2)player.transform.position + (Random.insideUnitCircle * 5));
+                clone.data = new Projectile.ProjectileData(aimedVector.normalized * Random.Range(projectileSpeed, projectileSpeed * GameManager.GetScore()/200f));
                 break;
             default:
                 break;
