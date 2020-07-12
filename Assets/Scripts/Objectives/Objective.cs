@@ -11,5 +11,16 @@ namespace Objectives {
         public abstract void Completed();
 
         public abstract void Failed();
+
+        public void DisplayText(string text, Vector3 location)
+        {
+            GameObject gameObject = Instantiate(Resources.Load("Prefabs/TextOnSpot")) as GameObject;
+            if(gameObject.GetComponent<TextOnSpot>() != null) {
+                
+                var tos = gameObject.GetComponent<TextOnSpot>();
+                tos.DisplayText = text;
+            }
+            gameObject.transform.position = location;
+        }
     }
 }
