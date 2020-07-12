@@ -42,6 +42,16 @@ namespace Objectives {
         }
 
         public override void Failed() {
+            GameManager.instance.Damage(1);
+            RenderFailMessage();
+        }
+        
+        private void RenderFailMessage() {
+            var player = FindObjectOfType<PlayerMovement>();
+            if (player == null) return;
+            var pos = player.transform.position;
+            pos.y += 2f;
+            DisplayText($"Objective Failed!", pos);
         }
     }
 }

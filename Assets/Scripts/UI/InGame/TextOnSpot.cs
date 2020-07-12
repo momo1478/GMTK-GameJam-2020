@@ -12,7 +12,7 @@ public class TextOnSpot : MonoBehaviour {
 	public float Speed;
 	public float DestroyAfter;
 	private float Timer;
-
+	
 	private int textSize = 180;
 
 	// Use this for initialization
