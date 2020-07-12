@@ -37,7 +37,9 @@ namespace Objectives {
         public override bool IsFailed() => timeLeft <= 0;
 
         public override void Completed() {
+            // TODO: Increment score
             DisplayText($"+{scoreReward}", targetTr.position);
+            
             // Manager.AddObjective(gameObject.AddComponent<MoveToArea>());
         }
 
