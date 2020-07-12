@@ -11,7 +11,9 @@ namespace Objectives {
             Objectives = new List<Objective>();
             ClearedObjectives = new List<Objective>();
             FailedObjectives = new List<Objective>();
-            var ob = gameObject.AddComponent<MoveToArea>();
+            Objective ob = gameObject.AddComponent<MoveToArea>();
+            AddObjective(ob);
+            ob = gameObject.AddComponent<SurviveLasers>();
             AddObjective(ob);
         }
 

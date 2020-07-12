@@ -314,6 +314,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayText: Test
   DisplayPoints: 100
-  TextPrefab: {fileID: 0}
+  TextPrefab: {fileID: 6733209623041932043}
   Speed: 3
-  DestroyAfter: 0.4
+  DestroyAfter: 0.6
