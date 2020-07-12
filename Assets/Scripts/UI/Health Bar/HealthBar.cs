@@ -16,15 +16,20 @@ public class HealthBar : MonoBehaviour
 
     void Start()
     {
+        slider = GetComponent<Slider>();
+        bar = GameObject.Find("Fill").GetComponent<Image>();
         GameManager.OnHealthChanged += UpdateHealthBarUI;
-        slider = GetComponent<Slider>();    
+    }
+
+    void Update()
+    {
+        // Update color
+        bar.color = Color.HSVToRGB(maxHue * slider.value, 1f, 1f);
     }
 
     private void UpdateHealthBarUI(int obj)
     {
         float percentage = (float)obj / GameManager.instance.StartingHealth;
         DOTween.To(() => slider.value, (x) => slider.value = x, percentage, 0.2f);
-        // Update color
-        bar.color = Color.HSVToRGB(maxHue * slider.value, 1f, 1f);
     }
 }
