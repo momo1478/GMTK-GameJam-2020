@@ -7,8 +7,6 @@ namespace Objectives {
         [SerializeField] private GameObject pointerPrefab;
         private RectTransform pointerTransform;
         private Vector3 pointerWorldPos;
-        private object debugPos;
-        private object debugPos2;
 
         private void Start() {
             var canvas = FindObjectsOfType<Canvas>().First(c => c.renderMode != RenderMode.WorldSpace);
@@ -26,7 +24,7 @@ namespace Objectives {
 
         private bool IsOffScreen(Vector3 targetPositionScreenPoint) {
             var rect = pointerTransform.rect;
-            debugPos = targetPositionScreenPoint.x;
+            
             return targetPositionScreenPoint.x - (rect.width / 2) <= 0 ||
                    targetPositionScreenPoint.x + (rect.width / 2) >= Screen.width ||
                    targetPositionScreenPoint.y - (rect.height / 2) <= 0 ||
@@ -46,6 +44,10 @@ namespace Objectives {
         public void Cleanup() {
             if (pointerTransform) Destroy(pointerTransform.gameObject);
             Destroy(gameObject);
+        }
+
+        private void OnDisable() {
+            Cleanup();
         }
     }
 }

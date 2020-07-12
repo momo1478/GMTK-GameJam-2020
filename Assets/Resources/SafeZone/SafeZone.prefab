@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 824679435281684621}
   - component: {fileID: 824679435281684616}
   - component: {fileID: 824679435281684617}
+  - component: {fileID: -7670003025683075522}
   m_Layer: 0
   m_Name: SafeZone
   m_TagString: Untagged
@@ -171,6 +172,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &-7670003025683075522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824679435281684620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 730beb393141411bae9e1720f38fe4c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerPrefab: {fileID: 139827167679045100, guid: d35185541b08312449c9b34d1713e2f6,
+    type: 3}
 --- !u!1 &2097864064750800751
 GameObject:
   m_ObjectHideFlags: 0
