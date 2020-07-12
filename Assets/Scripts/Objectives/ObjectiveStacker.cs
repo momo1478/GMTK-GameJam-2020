@@ -10,7 +10,8 @@ public class ObjectiveStacker : MonoBehaviour
     {
         MoveToArea,
         ActivateTarget,
-        SurviveLasers
+        SurviveLasers,
+        ActivateSafeZone
     }
 
     [HideInInspector] public ObjectiveManager objectiveManager;
@@ -50,11 +51,9 @@ public class ObjectiveStacker : MonoBehaviour
             case Objectives.SurviveLasers:
                 objectiveManager.AddObjective(gameObject.AddComponent<SurviveLasers>());
                 break;
+            case Objectives.ActivateSafeZone:
+                objectiveManager.AddObjective(gameObject.AddComponent<ActivateSafeZone>());
+                break;
         }
-    }
-
-    private void OnGUI()
-    {
-        GUILayout.Box(timer.ToString());
     }
 }

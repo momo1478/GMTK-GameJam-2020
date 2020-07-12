@@ -38,10 +38,5 @@ namespace Objectives {
             print("failed");
             GameManager.instance.Damage(5);
         }
-
-        private void OnGUI() {
-            GUILayout.Box(timeLeft.ToString());
-            GUILayout.Box(safeZone.HasActivated().ToString());
-        }
     }
 }
