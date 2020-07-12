@@ -95,7 +95,8 @@ public class GameManager : MonoBehaviour
 
     public static void AddScore(float rate)
     {
-        instance.score += rate;
+        if(instance.gameOver == null)
+            instance.score += rate;
     }
 
     public static void ResetGame()
