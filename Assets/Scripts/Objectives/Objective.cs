@@ -4,6 +4,9 @@ namespace Objectives {
     [RequireComponent(typeof(ObjectiveManager))]
     public abstract class Objective : MonoBehaviour {
         protected ObjectiveManager Manager;
+
+        public int scoreReward = 100;
+
         public abstract bool IsCompleted();
         public abstract void Cleanup();
         public abstract bool IsFailed();
