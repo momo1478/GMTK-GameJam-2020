@@ -12,7 +12,7 @@ public class ObjectiveStacker : MonoBehaviour
         ActivateTarget
     }
 
-    public ObjectiveManager objectiveManager;
+    [HideInInspector] public ObjectiveManager objectiveManager;
     public float TimeToNextObjective = 15f;
 
     private float timer = 0f;
