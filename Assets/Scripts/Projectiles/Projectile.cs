@@ -18,7 +18,7 @@ public class Projectile : MonoBehaviour
     public Rigidbody2D rb;
     public ProjectileData? data = null;
 
-    public int destroyAfterSeconds = 5;
+    public int destroyAfterSeconds = 10;
 
     // Start is called before the first frame update
     void Start()

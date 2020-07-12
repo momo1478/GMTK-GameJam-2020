@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     private SpriteRenderer playerRenderer;
     private Color originalColor;
 
+    public SpriteRenderer background;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -37,6 +39,7 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
         playerRenderer = GameObject.FindGameObjectWithTag("Player").GetComponent<SpriteRenderer>();
         originalColor = playerRenderer.color;
+        //background = GameObject.Find("Background").GetComponent<SpriteRenderer>();
         health = StartingHealth;
         score = 0;
     }
@@ -53,6 +56,25 @@ public class GameManager : MonoBehaviour
         StopCoroutine(HitPlayerRoutine());
         playerRenderer.color = originalColor;
         StartCoroutine(HitPlayerRoutine());
+    }
+
+    public static void SetBackgroundColor(Color color)
+    {
+        instance.StartCoroutine(instance.LerpToColor(color));
+    }
+
+    private IEnumerator LerpToColor(Color color)
+    {
+        var startColor = background.color;
+        float duration = 2f;
+        float curDuration = 0f;
+        while (curDuration < duration)
+        {
+            var curColor = Color.Lerp(startColor, color, curDuration / duration);
+            background.color = curColor;
+            curDuration += Time.deltaTime;
+            yield return null;
+        }
     }
 
     public void Heal(int amount)

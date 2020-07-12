@@ -5,6 +5,13 @@ using UnityEngine;
 
 public class EmitterManager : MonoBehaviour
 {
+    public static Color[] COLORS = new Color[] {
+        new Color(.0634f,0.38744f,.7075472f), // blue
+        new Color(.2916f,.6509f,.3f, 1), // green
+        new Color(.8301f,.2310f,.6252f, 1), // purple
+        Color.red,
+    };
+
     public Emitter.Behavior globalBehavior = Emitter.Behavior.Oscillate;
 
     public float globalSpeed = 5;
@@ -34,6 +41,8 @@ public class EmitterManager : MonoBehaviour
                 emitter.projectileSpeed = globalSpeed * (1 + (GameManager.GetScore() / difficultyScalingConstant));
                 emitter.spawnRate = globalRate * (1 + (GameManager.GetScore() / difficultyScalingConstant));
             }
+            // set color
+            GameManager.SetBackgroundColor(COLORS[UnityEngine.Random.Range(0, COLORS.Length)]);
             yield return new WaitForSeconds(5);
         }
     }
