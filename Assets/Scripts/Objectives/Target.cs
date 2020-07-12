@@ -20,16 +20,29 @@ namespace Objectives {
             fromPos.z = 0;
             var targetPositionScreenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
 
-            pointerTransform.position  = HandleOffscreen(targetPositionScreenPoint);
+            if (!IsOffScreen(targetPositionScreenPoint)) pointerTransform.position = new Vector3(999999, 999999, 999999);
+            else pointerTransform.position = HandleOffscreen(targetPositionScreenPoint);
         }
+
+        private bool IsOffScreen(Vector3 targetPositionScreenPoint) {
+            var rect = pointerTransform.rect;
+            debugPos = targetPositionScreenPoint.x;
+            return targetPositionScreenPoint.x - (rect.width / 2) <= 0 ||
+                   targetPositionScreenPoint.x + (rect.width / 2) >= Screen.width ||
+                   targetPositionScreenPoint.y - (rect.height / 2) <= 0 ||
+                   targetPositionScreenPoint.y + (rect.height / 2) >= Screen.height;
+        }
+
 
         private Vector3 HandleOffscreen(Vector3 targetPositionScreenPoint) {
             var rect = pointerTransform.rect;
-            var clampedX = Mathf.Clamp(targetPositionScreenPoint.x, 0 + (rect.width / 2), Screen.width - (rect.width / 2));
-            var clampedY = Mathf.Clamp(targetPositionScreenPoint.y, 0 + (rect.height / 2), Screen.height - (rect.height / 2));
+            var clampedX = Mathf.Clamp(targetPositionScreenPoint.x, 0 + (rect.width / 2),
+                Screen.width - (rect.width / 2));
+            var clampedY = Mathf.Clamp(targetPositionScreenPoint.y, 0 + (rect.height / 2),
+                Screen.height - (rect.height / 2));
             return new Vector3(clampedX, clampedY, 0);
         }
-        
+
         public void Cleanup() {
             if (pointerTransform) Destroy(pointerTransform.gameObject);
             Destroy(gameObject);

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Objectives {
     public class MoveToArea : Objective {
@@ -7,14 +9,22 @@ namespace Objectives {
         private float range = 10f;
         private float threshold;
         [SerializeField] private GameObject targetPrefab;
+        private float timeLeft;
+        [SerializeField] private float timeToComplete = 10f;
 
         private void Start() {
             Manager = GetComponent<ObjectiveManager>();
             playerTr = FindObjectOfType<PlayerMovement>().transform;
             if (targetPrefab == null) targetPrefab = Resources.Load<GameObject>("MoveToTarget");
-            targetTr = Instantiate(targetPrefab, new Vector3(Random.Range(-10,10), Random.Range(-10,10), 0), Quaternion.identity).transform;
+            targetTr = Instantiate(targetPrefab, new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), 0),
+                Quaternion.identity).transform;
             targetTr.localScale *= range;
             threshold = range / 2;
+            timeLeft = timeToComplete;
+        }
+
+        private void Update() {
+            timeLeft = Mathf.Clamp(timeLeft - Time.deltaTime, 0, timeToComplete);
         }
 
         public override bool IsCompleted() {
@@ -24,10 +34,11 @@ namespace Objectives {
 
         public override void Cleanup() => targetTr.GetComponent<Target>().Cleanup();
 
-        public override bool IsFailed() => false;
+        public override bool IsFailed() => timeLeft <= 0;
+
         public override void Completed() {
             // player health += 2
-            
+
             // Manager.AddObjective(gameObject.AddComponent<MoveToArea>());
         }
 

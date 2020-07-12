@@ -5,8 +5,8 @@ using Random = UnityEngine.Random;
 namespace Objectives {
     public class ActivateTarget : Objective {
         private float timeLeft;
-        [SerializeField] private float maxCharge = 3f;
         [SerializeField] private float timeToComplete = 10f;
+        [SerializeField] private float maxCharge = 3f;
         private ChargeStation chargeStation;
 
         private void Start() {

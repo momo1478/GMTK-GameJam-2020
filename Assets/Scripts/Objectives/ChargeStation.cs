@@ -15,7 +15,7 @@ namespace Objectives {
             if (!Input.GetKey(KeyCode.F) || !inRange) return;
 
             chargeLeft = Mathf.Clamp(chargeLeft - Time.deltaTime, 0, maxCharge);
-            slider.value = chargeLeft / maxCharge;
+            slider.value = (maxCharge - chargeLeft) / maxCharge;
             
             if (chargeLeft <= 0) Charged = true;
         }
