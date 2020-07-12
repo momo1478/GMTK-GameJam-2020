@@ -13,9 +13,9 @@ public class GameManager : MonoBehaviour
     public int StartingHealth = 25; 
 
     private int health;
+    private int score;
 
     private Coroutine gameOver;
-
 
     private void Awake()
     {
@@ -31,7 +31,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        health = StartingHealth;        
+        health = StartingHealth;
+        score = 0;
     }
 
     public void Damage(int amount)

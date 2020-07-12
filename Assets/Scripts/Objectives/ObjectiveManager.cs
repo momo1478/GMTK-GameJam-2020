@@ -11,10 +11,10 @@ namespace Objectives {
             Objectives = new List<Objective>();
             ClearedObjectives = new List<Objective>();
             FailedObjectives = new List<Objective>();
-            var ob = gameObject.AddComponent<ActivateTarget>();
-            var ob1 = gameObject.AddComponent<MoveToArea>();
-            AddObjective(ob);
-            AddObjective(ob1);
+            //var ob = gameObject.AddComponent<ActivateTarget>();
+            //var ob1 = gameObject.AddComponent<MoveToArea>();
+            //AddObjective(ob);
+            //AddObjective(ob1);
         }
 
         private void Update() {
