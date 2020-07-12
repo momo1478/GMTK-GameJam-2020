@@ -11,16 +11,27 @@ public class LevelManager : MonoBehaviour
     public ProgressBar progressBar;
     public float minimumLoadScreenTimeSeconds = 1;
 
+    private bool hasPersistent = false;
+
     private void Awake()
-    {
+    {        
         if (instance != null && instance != this) {
             Destroy(gameObject);
         } else {
-            instance = this;
+            instance = this;          
 
             if (loadOnAwake) {
                 UnityEngine.SceneManagement.SceneManager.LoadSceneAsync((int)SceneIndices.TITLE_SCREEN, LoadSceneMode.Additive);        
-            }            
+            } else {
+                if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex == (int)SceneIndices.PERSISTENT)
+                {
+                    hasPersistent = true;
+                }
+                if (!hasPersistent) {
+                    hasPersistent = true;
+                    UnityEngine.SceneManagement.SceneManager.LoadSceneAsync((int)SceneIndices.PERSISTENT, LoadSceneMode.Additive);
+                }
+            }                      
         }
     }
 
