@@ -9,7 +9,7 @@ public class EmitterManager : MonoBehaviour
         new Color(.0634f,0.38744f,.7075472f), // blue
         new Color(.2916f,.6509f,.3f, 1), // green
         new Color(.8301f,.2310f,.6252f, 1), // purple
-        Color.red,
+        new Color(.701f,.045f,.045f, 1), // red
     };
 
     public Emitter.Behavior globalBehavior = Emitter.Behavior.Oscillate;
