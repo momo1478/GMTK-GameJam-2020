@@ -34,10 +34,16 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SceneManager.sceneLoaded += OnSceneLoaded;
         playerRenderer = GameObject.FindGameObjectWithTag("Player").GetComponent<SpriteRenderer>();
         originalColor = playerRenderer.color;
         health = StartingHealth;
         score = 0;
+    }
+
+    private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        ResetGame();
     }
 
     public void Damage(int amount)
@@ -67,7 +73,7 @@ public class GameManager : MonoBehaviour
     IEnumerator GameOver()
     {
         Time.timeScale = 0.5f;
-        yield return new WaitForSecondsRealtime(3f);
+        yield return new WaitForSecondsRealtime(2f);
         Time.timeScale = 0f;
         Instantiate(
             Resources.Load<LoseUI>("UI/LoseUI"),
@@ -102,7 +108,8 @@ public class GameManager : MonoBehaviour
     public static void ResetGame()
     {
         instance.gameOver = null;
-        instance.health = 0;
+        instance.health = instance.StartingHealth;
         instance.score = 0;
+        Time.timeScale = 1f;
     }
 }
