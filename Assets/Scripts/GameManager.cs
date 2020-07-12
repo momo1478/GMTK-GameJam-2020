@@ -6,16 +6,19 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
     public static event Action<int> OnHealthChanged = delegate { };
+    public Coroutine gameOver = null;
 
     [Header("Starting Stats")]
-    public int StartingHealth = 25; 
+    public int StartingHealth = 25;
+
+    [Header("Miscellaneous")]
+    public Color hitColor;
 
     private int health;
-    public float score;
-
-    public Coroutine gameOver = null;
+    private float score;
+    private SpriteRenderer playerRenderer;
+    private Color originalColor;
 
     private void Awake()
     {
@@ -31,6 +34,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerRenderer = GameObject.FindGameObjectWithTag("Player").GetComponent<SpriteRenderer>();
+        originalColor = playerRenderer.color;
         health = StartingHealth;
         score = 0;
     }
@@ -39,6 +44,9 @@ public class GameManager : MonoBehaviour
     {
         health -= amount;
         OnHealthChanged(health);
+        StopCoroutine(HitPlayerRoutine());
+        playerRenderer.color = originalColor;
+        StartCoroutine(HitPlayerRoutine());
     }
 
     public void Heal(int amount)
@@ -65,6 +73,19 @@ public class GameManager : MonoBehaviour
             Resources.Load<LoseUI>("UI/LoseUI"),
             GameObject.Find("Canvas").GetComponent<Transform>()
         );
+    }
+
+    IEnumerator HitPlayerRoutine()
+    {
+        Color originalColor = playerRenderer.color;
+
+        for (int i = 0; i < 3; i++)
+        {
+            playerRenderer.color = hitColor;
+            yield return new WaitForSeconds(0.2f);
+            playerRenderer.color = originalColor;
+            yield return new WaitForSeconds(0.2f);
+        }
     }
 
     public static int GetScore()

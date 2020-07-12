@@ -46,4 +46,13 @@ public class Laser : MonoBehaviour
         }
         Destroy(gameObject);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Player")
+        {
+            GameManager.instance.Damage(3);
+            Destroy(collision);
+        }
+    }
 }

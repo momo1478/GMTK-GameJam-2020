@@ -814,7 +814,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1010,6 +1010,11 @@ PrefabInstance:
     - target: {fileID: 4058519990541697515, guid: 6c91fcd6aa6750b4e897199fad618812,
         type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4058519990541697515, guid: 6c91fcd6aa6750b4e897199fad618812,
+        type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4058519990541697517, guid: 6c91fcd6aa6750b4e897199fad618812,
@@ -1341,7 +1346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingHealth: 25
-  score: 0
+  hitColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!4 &1422806342 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1769864326492681695, guid: 41d589c75713add43b5f30c0d5790a12,
