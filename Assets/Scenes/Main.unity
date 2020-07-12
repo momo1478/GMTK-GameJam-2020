@@ -1739,7 +1739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.0055360794, a: 1}
+  m_Color: {r: 0.33333325, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2302,6 +2302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 801ed5ed6988c76478e7ec03b5d0e3b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bar: {fileID: 1636238815}
 --- !u!1001 &2076114116
 PrefabInstance:
   m_ObjectHideFlags: 0
