@@ -12,7 +12,7 @@ namespace Objectives {
         private void Start() {
             Manager = GetComponent<ObjectiveManager>();
             chargeStation = Instantiate(Resources.Load<ChargeStation>("ChargeStation"),
-                new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), 0), Quaternion.identity);
+                Utils.Utils.RandomPositionOnBoard(), Quaternion.identity);
             var scale = Random.Range(5, 15);
             chargeStation.transform.localScale *= scale;
             chargeStation.AssignObjective(maxCharge);

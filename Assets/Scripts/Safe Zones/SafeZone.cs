@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Safe_Zones {
     public class SafeZone : MonoBehaviour {
@@ -8,9 +9,11 @@ namespace Safe_Zones {
         
         private bool IsInactive () => animator.GetCurrentAnimatorStateInfo(0).IsName("Inactive");
         private bool IsActivating () => animator.GetCurrentAnimatorStateInfo(0).IsName("Activating");
-        private bool IsActive () => animator.GetCurrentAnimatorStateInfo(0).IsName("Active");
-        private bool IsClosing () => animator.GetCurrentAnimatorStateInfo(0).IsName("IsClosing");
-        private bool IsClosed () => animator.GetCurrentAnimatorStateInfo(0).IsName("IsClosed");
+        public bool IsActive () => animator.GetCurrentAnimatorStateInfo(0).IsName("Active");
+        private bool IsClosing () => animator.GetCurrentAnimatorStateInfo(0).IsName("Closing");
+        public bool IsClosed () => animator.GetCurrentAnimatorStateInfo(0).IsName("Closed");
+
+        public bool HasActivated() => IsActive() || IsClosed() || IsClosing();
         private void OnTriggerEnter2D(Collider2D other) {
             if (IsActivating() || IsInactive() || IsClosed()) return;
             
@@ -21,6 +24,10 @@ namespace Safe_Zones {
             if (IsActivating() || IsInactive() || IsClosed()) return;
 
             if (other.gameObject.GetComponent<Projectile>()) Destroy(other.gameObject);
+        }
+
+        private void Update() {
+            if (IsActive()) GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 }

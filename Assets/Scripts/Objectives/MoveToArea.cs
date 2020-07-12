@@ -16,7 +16,7 @@ namespace Objectives {
             Manager = GetComponent<ObjectiveManager>();
             playerTr = FindObjectOfType<PlayerMovement>().transform;
             if (targetPrefab == null) targetPrefab = Resources.Load<GameObject>("MoveToTarget");
-            targetTr = Instantiate(targetPrefab, new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), 0),
+            targetTr = Instantiate(targetPrefab, Utils.Utils.RandomPositionOnBoard(),
                 Quaternion.identity).transform;
             targetTr.localScale *= Random.Range(range/2f, range);
             threshold = range / 2;
