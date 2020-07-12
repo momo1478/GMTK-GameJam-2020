@@ -37,8 +37,7 @@ namespace Objectives {
         public override bool IsFailed() => timeLeft <= 0;
 
         public override void Completed() {
-            // player health += 2
-
+            DisplayText($"+{scoreReward}", targetTr.position);
             // Manager.AddObjective(gameObject.AddComponent<MoveToArea>());
         }
 
