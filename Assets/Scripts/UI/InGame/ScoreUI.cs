@@ -6,7 +6,6 @@ using System;
 
 public class ScoreUI : MonoBehaviour
 {
-
     public TextMeshProUGUI text;
 
     public float score = 0;
