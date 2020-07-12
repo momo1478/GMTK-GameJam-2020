@@ -51,8 +51,7 @@ public class Laser : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            GameManager.instance.Damage(3);
-            Destroy(collision);
+            GameManager.instance.Damage(2);
         }
     }
 }

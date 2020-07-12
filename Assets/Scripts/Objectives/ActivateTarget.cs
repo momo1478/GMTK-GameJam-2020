@@ -17,6 +17,7 @@ namespace Objectives {
             chargeStation.transform.localScale *= scale;
             chargeStation.AssignObjective(maxCharge);
             timeLeft = timeToComplete;
+            scoreReward = scoreReward * 3 / 2;
         }
 
         private void Update() {
@@ -36,6 +37,7 @@ namespace Objectives {
         {
             Manager.AddObjective(gameObject.AddComponent<ActivateTarget>());
             GameManager.AddScore(scoreReward);
+            DisplayText($"+{scoreReward}", chargeStation.transform.position);
         }
 
         public override void Failed()
