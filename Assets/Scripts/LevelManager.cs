@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+    public bool loadOnAwake = false;
     public static LevelManager instance;
     public GameObject loadingScreen;
     public ProgressBar progressBar;
@@ -16,7 +17,10 @@ public class LevelManager : MonoBehaviour
             Destroy(gameObject);
         } else {
             instance = this;
-            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync((int)SceneIndices.TITLE_SCREEN, LoadSceneMode.Additive);        
+
+            if (loadOnAwake) {
+                UnityEngine.SceneManagement.SceneManager.LoadSceneAsync((int)SceneIndices.TITLE_SCREEN, LoadSceneMode.Additive);        
+            }            
         }
     }
 
