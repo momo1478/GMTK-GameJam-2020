@@ -7,7 +7,7 @@ namespace Safe_Zones {
         private float stateTimeLeft;
         [SerializeField] private float activeDuration;
         private static readonly int Closing = Animator.StringToHash("Closing");
-        [SerializeField] private float range;
+        private float range = 1.2f;
         private CircleCollider2D collider;
         private float lerpTimeLeft;
         private float lerpDuration = .75f;
@@ -25,10 +25,12 @@ namespace Safe_Zones {
             var go = Instantiate(particleSystemObject, animator.gameObject.transform);
             go.transform.localPosition = Vector3.zero;
 
-            minColliderRadius = collider.radius;
+            minColliderRadius = 1f;
             
             particleSystem = go.GetComponent<ParticleSystem>() ??
                              throw new Exception($"Unable to assign particle system in {name}");
+            
+            animator.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         }
 
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
@@ -40,7 +42,7 @@ namespace Safe_Zones {
 
         private void HandleParticleSystemLerp() {
             var shape = particleSystem.shape;
-            shape.radius = collider.radius;
+            shape.radius = collider.gameObject.transform.localScale.x * collider.radius;
         }
 
         private void HandleColliderLerp() {

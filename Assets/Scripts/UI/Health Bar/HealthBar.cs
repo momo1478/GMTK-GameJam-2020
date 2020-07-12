@@ -6,6 +6,9 @@ using DG.Tweening;
 public class HealthBar : MonoBehaviour
 {
     Slider slider;
+    public Image bar;
+    private float maxHue = 120f / 360f; // Don't worry about it
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -13,8 +16,15 @@ public class HealthBar : MonoBehaviour
 
     void Start()
     {
+        slider = GetComponent<Slider>();
+        bar = GameObject.Find("Fill").GetComponent<Image>();
         GameManager.OnHealthChanged += UpdateHealthBarUI;
-        slider = GetComponent<Slider>();    
+    }
+
+    void Update()
+    {
+        // Update color
+        bar.color = Color.HSVToRGB(maxHue * slider.value, 1f, 1f);
     }
 
     private void UpdateHealthBarUI(int obj)
