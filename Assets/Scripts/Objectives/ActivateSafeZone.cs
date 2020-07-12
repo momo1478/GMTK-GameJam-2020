@@ -20,7 +20,11 @@ namespace Objectives {
             timeLeft = Mathf.Clamp(timeLeft - Time.deltaTime, 0, timeToComplete);
         }
 
-        public override bool IsCompleted() => safeZone.IsClosed();
+        public override bool IsCompleted()
+        {
+            if (safeZone == null) return false;
+            return safeZone.IsClosed();
+        } 
 
         public override void Cleanup() {
             Destroy(safeZone.gameObject);

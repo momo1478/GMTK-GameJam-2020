@@ -33,15 +33,11 @@ public class LoseUI : MonoBehaviour
 
     public void OnMainMenuClick()
     {
-        GameManager.ResetGame();
         SceneManager.LoadScene("TitleScreen");
-        Time.timeScale = 1f;
     }
 
     public void OnRetryClick()
     {
-        GameManager.ResetGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        Time.timeScale = 1f;
     }
 }
