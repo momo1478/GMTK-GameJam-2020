@@ -21,12 +21,16 @@ namespace Objectives {
         }
 
         private void OnTriggerEnter2D(Collider2D other) {
+            if (!other.GetComponent<PlayerMovement>()) return;
+
             inRange = true;
             slider.gameObject.SetActive(true);
             slider.enabled = true;
         }
 
         private void OnTriggerExit2D(Collider2D other) {
+            if (!other.GetComponent<PlayerMovement>()) return;
+            
             inRange = false;
             slider.gameObject.SetActive(false);
         }
