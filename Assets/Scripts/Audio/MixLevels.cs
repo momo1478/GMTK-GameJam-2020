@@ -10,11 +10,13 @@ public class MixLevels : MonoBehaviour
 
     private void Awake()
     {
-        if (current == null)
+        if (current != null && current != this)
+        {
+            Destroy(gameObject);
+        }
+        else
         {
             current = this;
-        } else {
-            Destroy(gameObject);
         }
     }
 
