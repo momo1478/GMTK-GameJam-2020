@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
 
     public SpriteRenderer background;
 
+    public Color previousBackgroundColor = Color.black;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -75,6 +76,8 @@ public class GameManager : MonoBehaviour
             curDuration += Time.deltaTime;
             yield return null;
         }
+
+        previousBackgroundColor = startColor;
     }
 
     public void Heal(int amount)

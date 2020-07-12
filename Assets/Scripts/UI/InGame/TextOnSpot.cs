@@ -18,6 +18,7 @@ public class TextOnSpot : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Timer = DestroyAfter;
+		TextPrefab.color = GameManager.instance.previousBackgroundColor;
 	}
 	
 	// Update is called once per frame
