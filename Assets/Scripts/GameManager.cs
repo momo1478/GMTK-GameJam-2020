@@ -39,14 +39,12 @@ public class GameManager : MonoBehaviour
     {
         health -= amount;
         OnHealthChanged(health);
-        print($"(-) Health : {health}");
     }
 
     public void Heal(int amount)
     {
         health += amount;
         OnHealthChanged(health);
-        print($"(+) Health : {health}");
     }
 
     // Update is called once per frame

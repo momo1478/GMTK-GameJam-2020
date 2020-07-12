@@ -22,7 +22,7 @@ namespace Objectives {
             timeLeft = Mathf.Clamp(timeLeft - Time.deltaTime, 0, timeToComplete);
         }
 
-        public override bool IsCompleted() => chargeStation.Charged;
+        public override bool IsCompleted() => chargeStation?.Charged ?? false;
 
         public override void Cleanup() {
             chargeStation.GetComponent<Target>().Cleanup();

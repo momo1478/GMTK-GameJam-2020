@@ -8,7 +8,6 @@ public class PlayerCollides : MonoBehaviour
     {
         if(collision.gameObject.GetComponent<Projectile>() != null)
         {
-            print("ded0");
             Destroy(collision.gameObject);
             GameManager.instance.Damage(1);
         }

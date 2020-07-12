@@ -14,7 +14,7 @@ namespace Objectives {
             //var ob = gameObject.AddComponent<ActivateTarget>();
             //var ob1 = gameObject.AddComponent<MoveToArea>();
             //AddObjective(ob);
-            //AddObjective(ob1);
+            ////AddObjective(ob1);
         }
 
         private void Update() {
