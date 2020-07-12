@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 
 namespace Objectives {
     public class Target : MonoBehaviour {
-        [SerializeField] private Sprite arrowSprite;
         [SerializeField] private GameObject pointerPrefab;
         private RectTransform pointerTransform;
         private Vector3 pointerWorldPos;
@@ -11,7 +11,7 @@ namespace Objectives {
         private object debugPos2;
 
         private void Start() {
-            var canvas = FindObjectOfType<Canvas>();
+            var canvas = FindObjectsOfType<Canvas>().First(c => c.renderMode != RenderMode.WorldSpace);
             pointerTransform = Instantiate(pointerPrefab, canvas.transform).GetComponent<RectTransform>();
         }
 

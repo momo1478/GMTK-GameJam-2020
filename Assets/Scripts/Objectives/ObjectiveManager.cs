@@ -11,7 +11,7 @@ namespace Objectives {
             Objectives = new List<Objective>();
             ClearedObjectives = new List<Objective>();
             FailedObjectives = new List<Objective>();
-            var ob = gameObject.AddComponent<MoveToArea>();
+            var ob = gameObject.AddComponent<ActivateTarget>();
             AddObjective(ob);
         }
 
@@ -43,21 +43,21 @@ namespace Objectives {
 
         private void HandleFailed() {
             for (int i = FailedObjectives.Count - 1; i >= 0; i--) {
-                var t = FailedObjectives[i];
-                t.Failed();
-                t.Cleanup();
-                Objectives.Remove(t);
-                FailedObjectives.Remove(t);
-                Destroy(t);
+                var o = FailedObjectives[i];
+                o.Failed();
+                o.Cleanup();
+                Objectives.Remove(o);
+                FailedObjectives.Remove(o);
+                if (o) Destroy(o);
             }
         }
         
-        public void AddObjective(Objective t) => Objectives.Add(t);
+        public void AddObjective(Objective o) => Objectives.Add(o);
 
-        public void RemoveObjective(Objective t) {
-            Objectives.Remove(t);
-            t.Cleanup();
-            if (t) Destroy(t);
+        public void RemoveObjective(Objective o) {
+            Objectives.Remove(o);
+            o.Cleanup();
+            if (o) Destroy(o);
         }
     }
 }
