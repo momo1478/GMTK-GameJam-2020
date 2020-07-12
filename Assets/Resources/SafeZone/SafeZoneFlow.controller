@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57fa0e37c7ada6c4d95b8fefacc92617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  threshold: 2
   activationTime: 2
 --- !u!1102 &-8340837928828032626
 AnimatorState:
@@ -88,7 +87,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
@@ -130,7 +129,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
@@ -151,7 +150,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeDuration: 1
-  range: 10
   particleSystemObject: {fileID: 5837763131287355104, guid: 18a38ddcca8a2b4418ab0c00932c2975,
     type: 3}
 --- !u!114 &-1303839068665165970
@@ -166,7 +164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8870057bc4f722047bda5d138af0f1ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  threshold: 2
 --- !u!1107 &-239069393865522396
 AnimatorStateMachine:
   serializedVersion: 5
@@ -270,7 +267,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0

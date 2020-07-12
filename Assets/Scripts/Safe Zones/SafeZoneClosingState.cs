@@ -40,7 +40,7 @@ namespace Safe_Zones {
 
         private void SetParticleSystemRadius() {
             var shape = particleSystem.shape;
-            shape.radius = collider.radius;
+            shape.radius = collider.gameObject.transform.localScale.x * collider.radius;
         }
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {

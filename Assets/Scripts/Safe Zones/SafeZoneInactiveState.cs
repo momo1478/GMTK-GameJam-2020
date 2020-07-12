@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Safe_Zones {
     public class SafeZoneInactiveState : SafeZoneState {
         private Transform activator;
-        [SerializeField] private float threshold;
+        private float threshold;
         private static readonly int Activating = Animator.StringToHash("Activating");
 
         private bool ShouldExit(Vector3 thisPos) {
@@ -14,6 +14,8 @@ namespace Safe_Zones {
         private bool TooFar(Vector3 thisPos) => Vector3.Distance(activator.position, thisPos) > threshold;
         
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+            var safeZone = animator.gameObject.GetComponent<SafeZone>();
+            threshold = safeZone.transform.localScale.x  / 2;
             activator = FindObjectOfType<PlayerMovement>().transform
                 ? FindObjectOfType<PlayerMovement>().transform
                 : throw new Exception("Unable to find player");
