@@ -31,7 +31,7 @@ public class Projectile : MonoBehaviour
     private IEnumerator DestroyOutsideofBounds()
     {
         float duration = 0f;
-        while(duration < destroyAfterSeconds && new Rect(-50, -50, 100, 100).Contains(gameObject.transform.position))
+        while(duration < destroyAfterSeconds && new Rect(-65, -65, 150, 150).Contains(gameObject.transform.position))
         {
             duration += 1;
             yield return new WaitForSeconds(1f);
