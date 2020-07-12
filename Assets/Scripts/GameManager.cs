@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator LerpToColor(Color color)
     {
         var startColor = background.color;
-        float duration = 2f;
+        float duration = 1.5f;
         float curDuration = 0f;
         while (curDuration < duration)
         {
