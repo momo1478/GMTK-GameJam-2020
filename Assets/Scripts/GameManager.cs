@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,12 +7,15 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public static event Action<int> OnHealthChanged = delegate { };
+
     [Header("Starting Stats")]
     public int StartingHealth = 25; 
 
     private int health;
 
     private Coroutine gameOver;
+
 
     private void Awake()
     {
@@ -33,12 +37,14 @@ public class GameManager : MonoBehaviour
     public void Damage(int amount)
     {
         health -= amount;
+        OnHealthChanged(health);
         print($"(-) Health : {health}");
     }
 
     public void Heal(int amount)
     {
         health += amount;
+        OnHealthChanged(health);
         print($"(+) Health : {health}");
     }
 
