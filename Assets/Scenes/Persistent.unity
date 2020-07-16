@@ -121,6 +121,38 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!82 &680528075 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2285621689726744930, guid: f05a78343959c764daae95ef7b5f71b7,
+    type: 3}
+  m_PrefabInstance: {fileID: 2285621690185636363}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &808569166 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2285621690091479002, guid: f05a78343959c764daae95ef7b5f71b7,
+    type: 3}
+  m_PrefabInstance: {fileID: 2285621690185636363}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &808569169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808569166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d46aae0bd7fa4f72a6f76083a7a9b9a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameMusic: {fileID: 680528075}
+  menuMusic: {fileID: 1649733937}
+--- !u!82 &1649733937 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2285621689782965169, guid: f05a78343959c764daae95ef7b5f71b7,
+    type: 3}
+  m_PrefabInstance: {fileID: 2285621690185636363}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2285621690185636363
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -132,6 +164,41 @@ PrefabInstance:
         type: 3}
       propertyPath: loadOnAwake
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285621689726744930, guid: f05a78343959c764daae95ef7b5f71b7,
+        type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285621689726744930, guid: f05a78343959c764daae95ef7b5f71b7,
+        type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285621689726744930, guid: f05a78343959c764daae95ef7b5f71b7,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ed1e9d1282634ed468deafb0247fce78, type: 3}
+    - target: {fileID: 2285621689726744930, guid: f05a78343959c764daae95ef7b5f71b7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285621689726744930, guid: f05a78343959c764daae95ef7b5f71b7,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285621689782965169, guid: f05a78343959c764daae95ef7b5f71b7,
+        type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285621689782965169, guid: f05a78343959c764daae95ef7b5f71b7,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3518721721158672485, guid: f05a78343959c764daae95ef7b5f71b7,
         type: 3}
