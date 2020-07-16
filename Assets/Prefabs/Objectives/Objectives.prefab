@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8903863290976604196}
   - component: {fileID: 18498665271731039}
+  - component: {fileID: 6441937994948063039}
   m_Layer: 0
   m_Name: Objectives
   m_TagString: Untagged
@@ -43,3 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27cfd1e4d49fbb94f899ed3ee42673a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6441937994948063039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347480722041919886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f88d9c14fa1853f4ba13839b30596b36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectiveManager: {fileID: 0}
+  TimeToNextObjective: 5

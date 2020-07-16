@@ -6,21 +6,21 @@ using Random = UnityEngine.Random;
 namespace Objectives {
     public class ActivateSafeZone : Objective {
         private SafeZone safeZone;
-        private float timeLeft;
+        private float lapsedTime = 0f;
         [SerializeField] private float timeToComplete = 10f;
+
         private void Start() {
             Manager = GetComponent<ObjectiveManager>();
             safeZone = Instantiate(Resources.Load<SafeZone>("SafeZone/SafeZone"));
             safeZone.transform.position = Utils.Utils.RandomPositionOnBoard();
             var scale = Random.Range(5, 15);
             safeZone.transform.localScale = new Vector3(scale,scale,1);
-            timeLeft = timeToComplete;
         }
 
         private void Update() {
             if (safeZone.HasActivated() || safeZone == null) return;
             
-            timeLeft = Mathf.Clamp(timeLeft - Time.deltaTime, 0, timeToComplete);
+            lapsedTime += Time.deltaTime;
         }
 
         public override bool IsCompleted()
@@ -33,7 +33,9 @@ namespace Objectives {
             Destroy(safeZone.gameObject);
         }
 
-        public override bool IsFailed() => timeLeft <= 0;
+        public override bool IsFailed() {
+            return lapsedTime > timeToComplete;
+        }
 
         public override void Completed() {
             Manager.AddObjective(gameObject.AddComponent<ActivateSafeZone>());

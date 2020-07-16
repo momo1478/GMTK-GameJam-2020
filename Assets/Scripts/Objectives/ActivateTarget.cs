@@ -4,7 +4,7 @@ using Random = UnityEngine.Random;
 
 namespace Objectives {
     public class ActivateTarget : Objective {
-        private float timeLeft;
+        private float lapsedTime = 0f;
         [SerializeField] private float timeToComplete = 10f;
         [SerializeField] private float maxCharge = 1.5f;
         private ChargeStation chargeStation;
@@ -16,12 +16,11 @@ namespace Objectives {
             var scale = Random.Range(5, 15);
             chargeStation.transform.localScale *= scale;
             chargeStation.AssignObjective(maxCharge);
-            timeLeft = timeToComplete;
             scoreReward = scoreReward * 3 / 2;
         }
 
         private void Update() {
-            timeLeft = Mathf.Clamp(timeLeft - Time.deltaTime, 0, timeToComplete);
+            lapsedTime += Time.deltaTime;
         }
 
         public override bool IsCompleted() => chargeStation?.Charged ?? false;
@@ -31,7 +30,9 @@ namespace Objectives {
             Destroy(chargeStation.gameObject);
         }
 
-        public override bool IsFailed() => timeLeft <= 0;
+        public override bool IsFailed() {
+            return lapsedTime > timeToComplete;
+        }
 
         public override void Completed()
         {
@@ -41,8 +42,8 @@ namespace Objectives {
         }
 
         public override void Failed() {
+            print("target");
             GameManager.instance.Damage(5);
-
             RenderFailMessage();
         }
 

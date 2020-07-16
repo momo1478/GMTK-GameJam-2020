@@ -9,7 +9,7 @@ namespace Objectives {
         private float range = 3f;
         private float threshold;
         [SerializeField] private GameObject targetPrefab;
-        private float timeLeft;
+        private float lapsedTime = 0;
         [SerializeField] private float timeToComplete = 10f;
 
         private void Start() {
@@ -20,11 +20,10 @@ namespace Objectives {
                 Quaternion.identity).transform;
             targetTr.localScale *= Random.Range(range/2f, range);
             threshold = range / 2;
-            timeLeft = timeToComplete;
         }
 
         private void Update() {
-            timeLeft = Mathf.Clamp(timeLeft - Time.deltaTime, 0, timeToComplete);
+            lapsedTime += Time.deltaTime;
         }
 
         public override bool IsCompleted() {
@@ -34,7 +33,7 @@ namespace Objectives {
 
         public override void Cleanup() => targetTr.GetComponent<Target>().Cleanup();
 
-        public override bool IsFailed() => timeLeft <= 0;
+        public override bool IsFailed() => lapsedTime > timeToComplete;
 
         public override void Completed() {
             // TODO: Increment score

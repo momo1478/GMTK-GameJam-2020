@@ -550,26 +550,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df48bbb7635d56d4f9f14c1bd8a4fe86, type: 3}
---- !u!1 &199082465 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1347480722041919886, guid: 182c313d0058bf642b31a3a480154be7,
-    type: 3}
-  m_PrefabInstance: {fileID: 1281927275}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &199082468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 199082465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f88d9c14fa1853f4ba13839b30596b36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectiveManager: {fileID: 0}
-  TimeToNextObjective: 15
 --- !u!1001 &241351960
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2595,7 +2575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6f7ee127ad3202499303001afcd5d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartingHealth: 25
+  StartingHealth: 1
   hitColor: {r: 1, g: 0, b: 0, a: 1}
   background: {fileID: 1872108678}
   previousBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
