@@ -14,6 +14,7 @@ namespace Audio {
             else
             {
                 Instance = this;
+                DontDestroyOnLoad(this);
             }
         }
 

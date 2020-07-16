@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Audio;
 using UnityEngine;
@@ -19,99 +20,28 @@ public class LevelManager : MonoBehaviour {
         }
         else {
             instance = this;
-
-            var activeScene = SceneManager.GetActiveScene();
-
-            if (loadOnAwake) {
-                StartCoroutine(LoadMainMenuScene());
+            DontDestroyOnLoad(gameObject);
+            if(SceneManager.GetActiveScene().buildIndex == (int) SceneIndices.TITLE_SCREEN){
+                AudioManager.Instance.PlayMenuMusic();
+                
+            }else if (SceneManager.GetActiveScene().buildIndex == (int) SceneIndices.GAME){
+                AudioManager.Instance.PlayGameMusic();
+                
             }
-            else {
-                if (activeScene.buildIndex == (int) SceneIndices.PERSISTENT) {
-                    hasPersistent = true;
-                }
-
-                if (!hasPersistent) {
-                    hasPersistent = true;
-                    SceneManager.LoadSceneAsync((int) SceneIndices.PERSISTENT, LoadSceneMode.Additive);
-                }
-            }
+                
         }
     }
-
-    List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
 
     public void LoadGame() {
-        StartCoroutine(LoadGameScene());
-    }
-    
-    private IEnumerator LoadGameScene() {
-        loadingScreen.gameObject.SetActive(true);
-        
         var gameScene = (int) SceneIndices.GAME;
-        var titleScene = (int) SceneIndices.TITLE_SCREEN;
-        
-        if (SceneManager.GetSceneByBuildIndex(titleScene).isLoaded)
-            scenesLoading.Add(SceneManager.UnloadSceneAsync(titleScene));
-        
-        scenesLoading.Add(SceneManager.LoadSceneAsync(gameScene, LoadSceneMode.Additive));
-
-        StartCoroutine(GetSceneLoadProgress());
-        
-        while (scenesLoading.Count > 0) {
-            yield return null;
-        }
-        
+        SceneManager.LoadScene(gameScene);
         AudioManager.Instance.PlayGameMusic();
     }
 
-    public void LoadMainMenu() {
-        StartCoroutine(LoadMainMenuScene());
-    }
 
-    public IEnumerator LoadMainMenuScene() {
-        loadingScreen.gameObject.SetActive(true);
-        var gameScene = (int) SceneIndices.GAME;
+    public void LoadMenu() {
         var titleScene = (int) SceneIndices.TITLE_SCREEN;
-        
-        if (SceneManager.GetSceneByBuildIndex(gameScene).isLoaded)
-            scenesLoading.Add(SceneManager.UnloadSceneAsync(gameScene));
-        
-        scenesLoading.Add(SceneManager.LoadSceneAsync(titleScene, LoadSceneMode.Additive));
-
-        StartCoroutine(GetSceneLoadProgress());
-
-        while (scenesLoading.Count > 0) {
-            yield return null;
-        }
-        
+        SceneManager.LoadScene(titleScene);
         AudioManager.Instance.PlayMenuMusic();
-    }
-
-    public IEnumerator GetSceneLoadProgress() {
-        float totalLoadingProgress = 0;
-
-        float startTime = Time.time;
-
-        foreach (AsyncOperation operation in scenesLoading) {
-            while (!operation.isDone) {
-                totalLoadingProgress = 0;
-                foreach (AsyncOperation operation1 in scenesLoading) {
-                    totalLoadingProgress += operation1.progress / scenesLoading.Count;
-                }
-
-                progressBar.SetCurrent(totalLoadingProgress * progressBar.maximum);
-                yield return null;
-            }
-        }
-
-        progressBar.SetCurrent(progressBar.maximum);
-
-        float loadTimeSeconds = Time.time - startTime;
-        if (loadTimeSeconds < minimumLoadScreenTimeSeconds) {
-            yield return new WaitForSecondsRealtime(minimumLoadScreenTimeSeconds - loadTimeSeconds);
-        }
-
-        loadingScreen.gameObject.SetActive(false);
-        scenesLoading.Clear();
     }
 }

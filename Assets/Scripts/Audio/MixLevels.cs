@@ -12,11 +12,12 @@ public class MixLevels : MonoBehaviour
     {
         if (current != null && current != this)
         {
-            Destroy(gameObject);
+            Destroy(this);
         }
         else
         {
             current = this;
+            DontDestroyOnLoad(this);
         }
     }
 

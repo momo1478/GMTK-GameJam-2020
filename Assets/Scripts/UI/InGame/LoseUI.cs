@@ -4,9 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoseUI : MonoBehaviour
-{
-
+public class LoseUI : MonoBehaviour {
     public TextMeshProUGUI gameOverText;
     public TextMeshProUGUI scoreText;
 
@@ -19,25 +17,19 @@ public class LoseUI : MonoBehaviour
     };
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         gameOverText.text = GAME_OVER_OPTIONS[Random.Range(0, GAME_OVER_OPTIONS.Length)];
         scoreText.text = GameManager.GetScore().ToString();
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
+    void Update() { }
+
+    public void OnMainMenuClick() {
+        LevelManager.instance.LoadMenu();
     }
 
-    public void OnMainMenuClick()
-    {
-        SceneManager.LoadScene("TitleScreen");
-    }
-
-    public void OnRetryClick()
-    {
-        SceneManager.LoadScene("Main");
+    public void OnRetryClick() {
+        LevelManager.instance.LoadGame();
     }
 }
