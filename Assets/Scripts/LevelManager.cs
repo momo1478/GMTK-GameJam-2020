@@ -29,7 +29,6 @@ public class LevelManager : MonoBehaviour {
             AudioManager.Instance.PlayMenuMusic();
         } else if (SceneManager.GetActiveScene().buildIndex == (int) SceneIndices.GAME){
             AudioManager.Instance.PlayGameMusic();
-            
         }
     }
 
