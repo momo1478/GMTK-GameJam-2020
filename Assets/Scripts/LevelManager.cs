@@ -21,14 +21,15 @@ public class LevelManager : MonoBehaviour {
         else {
             instance = this;
             DontDestroyOnLoad(gameObject);
-            if(SceneManager.GetActiveScene().buildIndex == (int) SceneIndices.TITLE_SCREEN){
-                AudioManager.Instance.PlayMenuMusic();
-                
-            }else if (SceneManager.GetActiveScene().buildIndex == (int) SceneIndices.GAME){
-                AudioManager.Instance.PlayGameMusic();
-                
-            }
-                
+        }
+    }
+
+    private void Start() {
+        if(SceneManager.GetActiveScene().buildIndex == (int) SceneIndices.TITLE_SCREEN){
+            AudioManager.Instance.PlayMenuMusic();
+        } else if (SceneManager.GetActiveScene().buildIndex == (int) SceneIndices.GAME){
+            AudioManager.Instance.PlayGameMusic();
+            
         }
     }
 
