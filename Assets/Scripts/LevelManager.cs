@@ -35,8 +35,6 @@ public class LevelManager : MonoBehaviour {
                     SceneManager.LoadSceneAsync((int) SceneIndices.PERSISTENT, LoadSceneMode.Additive);
                 }
             }
-
-            if (activeScene.buildIndex == (int) SceneIndices.TITLE_SCREEN) print("TITLE");
         }
     }
 
