@@ -1,11 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Objectives {
     public class ObjectiveManager : MonoBehaviour {
-        public List<Objective> Objectives {get; private set;}
-        public List<Objective> ClearedObjectives {get; private set;}
-        public List<Objective> FailedObjectives {get; private set;}
+        public List<Objective> Objectives { get; private set; }
+        public List<Objective> ClearedObjectives { get; private set; }
+        public List<Objective> FailedObjectives { get; private set; }
+        public static Action<Objective> onObjectiveAdded = delegate { };
+        public static Action<Objective> onObjectiveRemoved = delegate { };
 
         private void Awake() {
             Objectives = new List<Objective>();
@@ -31,6 +34,7 @@ namespace Objectives {
         private void HandleCompleted() {
             for (int i = ClearedObjectives.Count - 1; i >= 0; i--) {
                 var o = ClearedObjectives[i];
+                onObjectiveRemoved(o);
                 o.Completed();
                 o.Cleanup();
                 Objectives.Remove(o);
@@ -42,6 +46,7 @@ namespace Objectives {
         private void HandleFailed() {
             for (int i = FailedObjectives.Count - 1; i >= 0; i--) {
                 var o = FailedObjectives[i];
+                onObjectiveRemoved(o);
                 o.Failed();
                 o.Cleanup();
                 Objectives.Remove(o);
@@ -49,8 +54,11 @@ namespace Objectives {
                 if (o) Destroy(o);
             }
         }
-        
-        public void AddObjective(Objective o) => Objectives.Add(o);
+
+        public void AddObjective(Objective o) {
+            Objectives.Add(o);
+            onObjectiveAdded(o);
+        }
 
         public void RemoveObjective(Objective o) {
             Objectives.Remove(o);

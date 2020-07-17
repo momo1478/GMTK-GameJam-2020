@@ -6,15 +6,14 @@ using Random = UnityEngine.Random;
 namespace Objectives {
     public class ActivateSafeZone : Objective {
         private SafeZone safeZone;
-        private float lapsedTime = 0f;
-        [SerializeField] private float timeToComplete = 10f;
-
         private void Start() {
             Manager = GetComponent<ObjectiveManager>();
-            safeZone = Instantiate(Resources.Load<SafeZone>("SafeZone/SafeZone"));
+            safeZone = Instantiate(Resources.Load<SafeZone>("SafeZone/SafeZone"), gameObject.transform, true);
             safeZone.transform.position = Utils.Utils.RandomPositionOnBoard();
             var scale = Random.Range(5, 15);
             safeZone.transform.localScale = new Vector3(scale,scale,1);
+            DisplayName = "Safe Zone";
+
         }
 
         private void Update() {

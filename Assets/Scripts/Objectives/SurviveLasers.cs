@@ -43,7 +43,7 @@ namespace Objectives {
 
         private void SpawnLaser()
         {
-            Laser laser = Instantiate(Resources.Load<Laser>("Laser"));
+            Laser laser = Instantiate(Resources.Load<Laser>("Laser"), gameObject.transform, true);
             float laserWidth = Random.Range(5, 30);
             Vector3 offset = new Vector2(
                 Random.Range(-laserOffsetRange, laserOffsetRange),

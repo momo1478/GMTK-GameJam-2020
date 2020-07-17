@@ -4,8 +4,13 @@ namespace Objectives {
     [RequireComponent(typeof(ObjectiveManager))]
     public abstract class Objective : MonoBehaviour {
         protected ObjectiveManager Manager;
+        public float lapsedTime = 0;
+
+        [SerializeField] public float timeToComplete = 10f;
+
 
         public int scoreReward = 10;
+        public string DisplayName { get; protected set; } = "";
 
         public abstract bool IsCompleted();
         public abstract void Cleanup();

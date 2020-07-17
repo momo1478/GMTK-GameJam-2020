@@ -9,9 +9,7 @@ namespace Objectives {
         private float range = 3f;
         private float threshold;
         [SerializeField] private GameObject targetPrefab;
-        private float lapsedTime = 0;
-        [SerializeField] private float timeToComplete = 10f;
-
+        
         private void Start() {
             Manager = GetComponent<ObjectiveManager>();
             playerTr = FindObjectOfType<PlayerMovement>().transform;
@@ -20,6 +18,8 @@ namespace Objectives {
                 Quaternion.identity).transform;
             targetTr.localScale *= Random.Range(range/2f, range);
             threshold = range / 2;
+            targetTr.SetParent(gameObject.transform);
+            DisplayName = "Move To Area";
         }
 
         private void Update() {

@@ -47,7 +47,7 @@ public class Emitter : MonoBehaviour
 
     public void SpawnBullet()
     {
-        Projectile clone;
+        Projectile clone = null;
         switch (behavior)
         {
             case Behavior.Spin:
@@ -81,6 +81,7 @@ public class Emitter : MonoBehaviour
             default:
                 break;
         }
+        clone.transform.SetParent(gameObject.transform);
     }
 
     // Update is called once per frame

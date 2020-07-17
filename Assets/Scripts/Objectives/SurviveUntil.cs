@@ -4,10 +4,10 @@ namespace Objectives {
     public abstract class SurviveUntil : Objective {
                 
         protected float startTime = 0;
-        [SerializeField] public float timeToComplete = 10f;  // sec
-
+    
         protected virtual void Start() {
             startTime = Time.time;
+            DisplayName = "Survive";
         }
 
         public override bool IsCompleted()

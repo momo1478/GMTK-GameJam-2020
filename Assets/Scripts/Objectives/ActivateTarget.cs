@@ -4,8 +4,6 @@ using Random = UnityEngine.Random;
 
 namespace Objectives {
     public class ActivateTarget : Objective {
-        private float lapsedTime = 0f;
-        [SerializeField] private float timeToComplete = 10f;
         [SerializeField] private float maxCharge = 1.5f;
         private ChargeStation chargeStation;
 
@@ -17,6 +15,9 @@ namespace Objectives {
             chargeStation.transform.localScale *= scale;
             chargeStation.AssignObjective(maxCharge);
             scoreReward = scoreReward * 3 / 2;
+            chargeStation.transform.SetParent(gameObject.transform);
+            DisplayName = "Charge Station";
+
         }
 
         private void Update() {
@@ -42,7 +43,6 @@ namespace Objectives {
         }
 
         public override void Failed() {
-            print("target");
             GameManager.instance.Damage(5);
             RenderFailMessage();
         }

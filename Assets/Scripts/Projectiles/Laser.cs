@@ -6,7 +6,7 @@ public class Laser : MonoBehaviour
 {
     public float shadowTransparency = .5f;
     public float shadowDuration = 1f;
-    public float scaleDuration = 10f;
+    public float scaleDuration = 5f;
     public float scaleSpeed = 5000f;
 
     // Start is called before the first frame update
