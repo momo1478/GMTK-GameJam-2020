@@ -4,7 +4,8 @@ using UnityEngine;
 
 public enum SceneIndices
 {
-    PERSISTENT = 0,
-    TITLE_SCREEN = 1,
-    GAME = 2
+    
+    TITLE_SCREEN = 0,
+    GAME = 1,
+    PERSISTENT = 2,
 }
