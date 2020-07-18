@@ -48,6 +48,7 @@ namespace Safe_Zones {
             particleSystem.Stop();
             particleSystem.Clear();
             Destroy(particleSystem.gameObject);
+            Destroy(animator.gameObject);
         }
 
         private bool ShouldEnterClosed() {

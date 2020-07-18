@@ -5,6 +5,11 @@ namespace Objectives {
                 
         protected float startTime = 0;
     
+        protected override void Awake() {
+            timeToComplete = 4f;
+            base.Awake();
+        }
+        
         protected virtual void Start() {
             startTime = Time.time;
             DisplayName = "Survive";

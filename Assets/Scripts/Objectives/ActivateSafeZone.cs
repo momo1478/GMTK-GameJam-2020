@@ -18,7 +18,8 @@ namespace Objectives {
         }
 
         private void Update() {
-            if (safeZone.HasActivated() || safeZone == null) return;
+            if (safeZone == null) return;
+            if (safeZone.HasActivated() ) return;
             
             lapsedTime += Time.deltaTime;
             
@@ -32,11 +33,12 @@ namespace Objectives {
         public override bool IsCompleted()
         {
             if (safeZone == null) return false;
-            return safeZone.IsClosed();
+            return safeZone.HasActivated();
         } 
 
         public override void Cleanup() {
-            Destroy(safeZone.gameObject);
+            if (safeZone == null) return;
+            safeZone.Cleanup();
         }
 
         public override bool IsFailed() {
@@ -44,9 +46,9 @@ namespace Objectives {
         }
 
         public override void Completed() {
-            Manager.AddObjective(gameObject.AddComponent<ActivateSafeZone>());
-            GameManager.AddScore(scoreReward);
-            DisplayText($"+{scoreReward}", safeZone.transform.position);
+            Manager.AddObjectiveSoon(timeToComplete - lapsedTime, () => Manager.AddObjective(Manager.gameObject.AddComponent<ActivateSafeZone>()));
+            GameManager.AddScore(calculateReward);
+            DisplayText($"+{calculateReward}", safeZone.transform.position);
         }
 
         public override void Failed() {

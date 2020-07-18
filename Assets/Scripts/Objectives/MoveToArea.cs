@@ -44,10 +44,9 @@ namespace Objectives {
         public override bool IsFailed() => lapsedTime > timeToComplete;
 
         public override void Completed() {
-            // TODO: Increment score
-            Manager.AddObjective(gameObject.AddComponent<MoveToArea>());
-            GameManager.AddScore(scoreReward);
-            DisplayText($"+{scoreReward}", targetTr.position);
+            Manager.AddObjectiveSoon(timeToComplete - lapsedTime, () => Manager.AddObjective(Manager.gameObject.AddComponent<MoveToArea>()));
+            GameManager.AddScore(calculateReward);
+            DisplayText($"+{calculateReward}", targetTr.position);
         }
 
         public override void Failed() {

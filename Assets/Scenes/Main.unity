@@ -737,25 +737,6 @@ MonoBehaviour:
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
---- !u!1 &413296753 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1347480722041919886, guid: 182c313d0058bf642b31a3a480154be7,
-    type: 3}
-  m_PrefabInstance: {fileID: 1281927275}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &413296757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 413296753}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cbfe61eb15e447e8d249943c10b3726, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectiveManager: {fileID: 0}
 --- !u!1001 &491760359
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -44,10 +45,11 @@ namespace Objectives {
 
         public override void Completed()
         {
-            Manager.AddObjective(gameObject.AddComponent<ActivateTarget>());
-            GameManager.AddScore(scoreReward);
-            DisplayText($"+{scoreReward}", chargeStation.transform.position);
+            Manager.AddObjectiveSoon(timeToComplete - lapsedTime, () => Manager.AddObjective(Manager.gameObject.AddComponent<ActivateTarget>()));
+            GameManager.AddScore(calculateReward);
+            DisplayText($"+{calculateReward}", chargeStation.transform.position);
         }
+
 
         public override void Failed() {
             GameManager.instance.Damage(5);

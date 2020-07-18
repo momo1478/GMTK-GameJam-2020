@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,10 @@ namespace Objectives {
             ClearedObjectives = new List<Objective>();
             FailedObjectives = new List<Objective>();
         }
+
+        // private void Start() {
+        //     AddObjective(gameObject.AddComponent<MoveToArea>());
+        // }
 
         private void Update() {
             foreach (var o in Objectives) UpdateObjectives(o);
@@ -39,7 +44,7 @@ namespace Objectives {
                 o.Cleanup();
                 Objectives.Remove(o);
                 ClearedObjectives.Remove(o);
-                Destroy(o);
+                if (o) Destroy(o);
             }
         }
 
@@ -60,6 +65,13 @@ namespace Objectives {
             onObjectiveAdded(o);
         }
 
+        public void AddObjectiveSoon(float waitTime, Action cb) {
+            StartCoroutine(AddObjectiveCR(waitTime, cb));
+        }
+        IEnumerator AddObjectiveCR(float waitTime, Action cb) {
+            yield return new WaitForSeconds(waitTime);
+            cb();
+        }
         public void RemoveObjective(Objective o) {
             Objectives.Remove(o);
             o.Cleanup();

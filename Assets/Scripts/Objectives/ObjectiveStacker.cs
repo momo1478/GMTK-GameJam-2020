@@ -16,7 +16,8 @@ public class ObjectiveStacker : MonoBehaviour
 
     [HideInInspector] public ObjectiveManager objectiveManager;
     public float TimeToNextObjective;
-
+    [SerializeField] private float backoffRate = 1.25f;
+    public float objectiveAdditionalTime { get; private set; } = 1f;
     private float timer = 0f;
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,8 @@ public class ObjectiveStacker : MonoBehaviour
         if (timer >= TimeToNextObjective)
         {
             AddNewObjective();
+            TimeToNextObjective *= backoffRate;
+            objectiveAdditionalTime *= backoffRate;
             timer = 0;
         }
     }
@@ -40,7 +43,7 @@ public class ObjectiveStacker : MonoBehaviour
     {
         Array values = Objectives.GetValues(typeof(Objectives));
         Objectives randomObjective = (Objectives)values.GetValue(UnityEngine.Random.Range(0, values.Length));
-        // var randomObjective = Objectives.MoveToArea;
+        // var randomObjective = Objectives.ActivateSafeZone;
         switch (randomObjective)
         {
             case Objectives.MoveToArea:

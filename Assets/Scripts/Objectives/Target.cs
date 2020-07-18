@@ -43,7 +43,7 @@ namespace Objectives {
 
         public void Cleanup() {
             if (PointerTransform) Destroy(PointerTransform.gameObject);
-            Destroy(gameObject);
+            Destroy(this);
         }
 
         private void OnDisable() {

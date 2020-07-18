@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
@@ -10,11 +11,18 @@ namespace Objectives {
         public float lapsedTime = 0;
         protected bool animating;
 
-        [SerializeField] public float timeToComplete = 10f;
+        [SerializeField] public float timeToComplete = 6f;
 
 
         public int scoreReward = 10;
+        private int justInTimeBonus = 2;
         public string DisplayName { get; protected set; } = "";
+
+        protected virtual void Awake() {
+            if (FindObjectOfType<ObjectiveStacker>()) {
+                timeToComplete += FindObjectOfType<ObjectiveStacker>().objectiveAdditionalTime;
+            }
+        }
 
         public abstract bool IsCompleted();
         public abstract void Cleanup();
@@ -64,5 +72,7 @@ namespace Objectives {
             tos.SetFontSize(textSize);
             go.transform.position = location;
         }
+
+        protected int calculateReward => animating ? scoreReward * justInTimeBonus : scoreReward;
     }
 }

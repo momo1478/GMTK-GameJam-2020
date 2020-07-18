@@ -8,7 +8,9 @@ namespace Objectives {
         public float laserOffsetRange = 20f;
         public int distanceAwayFromPlayer = 50;
 
-        private Transform playerTr; 
+        private Transform playerTr;
+
+
 
         protected override void Start() {
             base.Start();
@@ -43,7 +45,7 @@ namespace Objectives {
 
         private void SpawnLaser()
         {
-            Laser laser = Instantiate(Resources.Load<Laser>("Laser"), gameObject.transform, true);
+            Laser laser = Instantiate(Resources.Load<Laser>("Laser"));
             float laserWidth = Random.Range(5, 30);
             Vector3 offset = new Vector2(
                 Random.Range(-laserOffsetRange, laserOffsetRange),
@@ -55,6 +57,7 @@ namespace Objectives {
             laser.transform.position = location + offset;
             laser.transform.right = playerTr.transform.position - laser.transform.position;
             laser.transform.localScale = new Vector3(1, laserWidth, 0);
+            laser.transform.SetParent(gameObject.transform, true);
         }
     }
 }
