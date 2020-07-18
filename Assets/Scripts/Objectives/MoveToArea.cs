@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Objectives {
@@ -9,7 +12,8 @@ namespace Objectives {
         private float range = 3f;
         private float threshold;
         [SerializeField] private GameObject targetPrefab;
-        
+        private bool animating;
+
         private void Start() {
             Manager = GetComponent<ObjectiveManager>();
             playerTr = FindObjectOfType<PlayerMovement>().transform;
@@ -24,6 +28,26 @@ namespace Objectives {
 
         private void Update() {
             lapsedTime += Time.deltaTime;
+            if (timeToComplete - lapsedTime <= 4 && !animating) {
+                StartCoroutine(TweenOp());
+            }
+        }
+
+        private IEnumerator TweenOp() {
+            animating = true;
+            var sequence = DOTween.Sequence();
+            var sr = targetTr.GetComponent<SpriteRenderer>();
+            sequence.Append(DOTween.To(() => sr.color.a, (x) => sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, x), 0, 1));
+            sequence.Append(DOTween.To(() => sr.color.a, (x) => sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, x), 1, 0.5f));
+            sequence.Append(DOTween.To(() => sr.color.a, (x) => sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, x), 0, 0.5f));
+            sequence.Append(DOTween.To(() => sr.color.a, (x) => sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, x), 1, .5f));
+            sequence.Append(DOTween.To(() => sr.color.a, (x) => sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, x), 0, .5f));
+            sequence.Append(DOTween.To(() => sr.color.a, (x) => sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, x), 1, .25f));
+            sequence.Append(DOTween.To(() => sr.color.a, (x) => sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, x), 0, .25f));
+            sequence.Append(DOTween.To(() => sr.color.a, (x) => sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, x), 1, .25f));
+            sequence.Append(DOTween.To(() => sr.color.a, (x) => sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, x), 0, .25f));
+            sequence.Play();
+            yield return null;
         }
 
         public override bool IsCompleted() {
