@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -11,8 +12,18 @@ namespace Objectives {
 
         private void Start() {
             Manager = GetComponent<ObjectiveManager>();
+            var objectives = FindObjectsOfType<Target>().Select(x => {
+                if (x.transform != null)
+                    return x.transform;
+                else return null;
+            }).Where(x => x !=null).ToList();
+            var rndmPos = objectives.ElementAtOrDefault(Random.Range(0, objectives.Count));
+            
+            var spawnPos = rndmPos != null && Random.Range(0, 10) >= 5f
+                ? Utils.Utils.RandomPositionNear(rndmPos.position)
+                : Utils.Utils.RandomPositionOnBoard();
             chargeStation = Instantiate(Resources.Load<ChargeStation>("ChargeStation"),
-                Utils.Utils.RandomPositionOnBoard(), Quaternion.identity);
+                spawnPos, Quaternion.identity);
             var scale = Random.Range(5, 15);
             chargeStation.transform.localScale *= scale;
             chargeStation.AssignObjective(maxCharge);

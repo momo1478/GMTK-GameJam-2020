@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +9,7 @@ using Random = UnityEngine.Random;
 namespace Objectives {
     public class MoveToArea : Objective {
         private Transform playerTr;
-        private Transform targetTr;
+        public Transform targetTr { get; private set; }
         private float range = 3f;
         private float threshold;
         [SerializeField] private GameObject targetPrefab;
@@ -17,7 +18,19 @@ namespace Objectives {
             Manager = GetComponent<ObjectiveManager>();
             playerTr = FindObjectOfType<PlayerMovement>().transform;
             if (targetPrefab == null) targetPrefab = Resources.Load<GameObject>("MoveToTarget");
-            targetTr = Instantiate(targetPrefab, Utils.Utils.RandomPositionOnBoard(),
+
+            var objectives = FindObjectsOfType<Target>().Select(x => {
+                if (x.transform != null)
+                    return x.transform;
+                else return null;
+            }).Where(x => x !=null).ToList();
+            var rndmPos = objectives.ElementAtOrDefault(Random.Range(0, objectives.Count));
+            
+            var spawnPos = rndmPos != null && Random.Range(0, 10) >= 5f
+                ? Utils.Utils.RandomPositionNear(rndmPos.position)
+                : Utils.Utils.RandomPositionOnBoard();
+
+            targetTr = Instantiate(targetPrefab, spawnPos,
                 Quaternion.identity).transform;
             targetTr.localScale *= Random.Range(range / 2f, range);
             threshold = range / 2;
@@ -47,7 +60,8 @@ namespace Objectives {
         public override bool IsFailed() => lapsedTime > timeToComplete;
 
         public override void Completed() {
-            Manager.AddObjectiveSoon(timeToComplete - lapsedTime, () => Manager.AddObjective(Manager.gameObject.AddComponent<MoveToArea>()));
+            Manager.AddObjectiveSoon(timeToComplete - lapsedTime,
+                () => Manager.AddObjective(Manager.gameObject.AddComponent<MoveToArea>()));
             GameManager.AddScore(calculateReward);
             DisplayText($"+{calculateReward}", targetTr.position);
         }

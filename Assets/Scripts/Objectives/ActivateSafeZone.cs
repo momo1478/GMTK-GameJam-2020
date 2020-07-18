@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Safe_Zones;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,8 +10,19 @@ namespace Objectives {
         private SafeZone safeZone;
         private void Start() {
             Manager = GetComponent<ObjectiveManager>();
+            var objectives = FindObjectsOfType<Target>().Select(x => {
+                if (x.transform != null)
+                    return x.transform;
+                else return null;
+            }).Where(x => x !=null).ToList();
+            var rndmPos = objectives.ElementAtOrDefault(Random.Range(0, objectives.Count));
+            
+            var spawnPos = rndmPos != null && Random.Range(0, 10) >= 5f
+                ? Utils.Utils.RandomPositionNear(rndmPos.position)
+                : Utils.Utils.RandomPositionOnBoard();
+            
             safeZone = Instantiate(Resources.Load<SafeZone>("SafeZone/SafeZone"), gameObject.transform, true);
-            safeZone.transform.position = Utils.Utils.RandomPositionOnBoard();
+            safeZone.transform.position = spawnPos;
             var scale = Random.Range(5, 15);
             safeZone.transform.localScale = new Vector3(scale,scale,1);
             DisplayName = "Safe Zone";
