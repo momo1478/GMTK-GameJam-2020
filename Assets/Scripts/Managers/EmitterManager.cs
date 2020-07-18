@@ -18,7 +18,7 @@ public class EmitterManager : MonoBehaviour
     public float globalRate = 50;
 
     [Range(25f, 1000f)]
-    public float difficultyScalingConstant = 300f;
+    public float difficultyScalingConstant = 500f;
 
     public Emitter[] emitters;
 

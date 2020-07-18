@@ -39,7 +39,10 @@ namespace Objectives {
             return Vector2.Distance(playerTr.position, targetTr.position) <= threshold;
         }
 
-        public override void Cleanup() => targetTr.GetComponent<Target>().Cleanup();
+        public override void Cleanup() {
+            targetTr.GetComponent<Target>().Cleanup();
+            Destroy(targetTr.gameObject);
+        }
 
         public override bool IsFailed() => lapsedTime > timeToComplete;
 
@@ -50,7 +53,7 @@ namespace Objectives {
         }
 
         public override void Failed() {
-            GameManager.instance.Damage(5);
+            GameManager.instance.Damage(2);
             RenderFailMessage();
         }
 

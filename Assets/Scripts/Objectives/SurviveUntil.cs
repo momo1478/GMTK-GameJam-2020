@@ -15,9 +15,9 @@ namespace Objectives {
             DisplayName = "Survive";
         }
 
-        public override bool IsCompleted()
-        {
-            return (Time.time - startTime) > timeToComplete;
+        public override bool IsCompleted() {
+            lapsedTime = (Time.time - startTime);
+            return  lapsedTime > timeToComplete;
         }
 
         public override void Cleanup() {

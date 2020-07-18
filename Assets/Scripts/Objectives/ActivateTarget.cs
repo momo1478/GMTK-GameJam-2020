@@ -52,7 +52,7 @@ namespace Objectives {
 
 
         public override void Failed() {
-            GameManager.instance.Damage(5);
+            GameManager.instance.Damage(2);
             RenderFailMessage();
         }
 

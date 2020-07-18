@@ -43,7 +43,7 @@ public class ObjectiveStacker : MonoBehaviour
     {
         Array values = Objectives.GetValues(typeof(Objectives));
         Objectives randomObjective = (Objectives)values.GetValue(UnityEngine.Random.Range(0, values.Length));
-        // var randomObjective = Objectives.ActivateSafeZone;
+        // var randomObjective = Objectives.SurviveLasers;
         switch (randomObjective)
         {
             case Objectives.MoveToArea:
