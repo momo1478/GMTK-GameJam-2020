@@ -39,8 +39,8 @@ public class ObjectiveStacker : MonoBehaviour
     void AddNewObjective()
     {
         Array values = Objectives.GetValues(typeof(Objectives));
-        // Objectives randomObjective = (Objectives)values.GetValue(UnityEngine.Random.Range(0, values.Length));
-        var randomObjective = Objectives.MoveToArea;
+        Objectives randomObjective = (Objectives)values.GetValue(UnityEngine.Random.Range(0, values.Length));
+        // var randomObjective = Objectives.MoveToArea;
         switch (randomObjective)
         {
             case Objectives.MoveToArea:

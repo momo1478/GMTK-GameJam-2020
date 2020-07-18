@@ -5,12 +5,12 @@ using UnityEngine;
 namespace Objectives {
     public class Target : MonoBehaviour {
         [SerializeField] private GameObject pointerPrefab;
-        private RectTransform pointerTransform;
+        public RectTransform PointerTransform { get; private set; }
         private Vector3 pointerWorldPos;
 
         private void Start() {
             var canvas = FindObjectsOfType<Canvas>().First(c => c.renderMode != RenderMode.WorldSpace);
-            pointerTransform = Instantiate(pointerPrefab, canvas.transform).GetComponent<RectTransform>();
+            PointerTransform = Instantiate(pointerPrefab, canvas.transform).GetComponent<RectTransform>();
         }
 
         private void Update() {
@@ -18,12 +18,12 @@ namespace Objectives {
             fromPos.z = 0;
             var targetPositionScreenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
 
-            if (!IsOffScreen(targetPositionScreenPoint)) pointerTransform.position = new Vector3(999999, 999999, 999999);
-            else pointerTransform.position = HandleOffscreen(targetPositionScreenPoint);
+            if (!IsOffScreen(targetPositionScreenPoint)) PointerTransform.position = new Vector3(999999, 999999, 999999);
+            else PointerTransform.position = HandleOffscreen(targetPositionScreenPoint);
         }
 
         private bool IsOffScreen(Vector3 targetPositionScreenPoint) {
-            var rect = pointerTransform.rect;
+            var rect = PointerTransform.rect;
             
             return targetPositionScreenPoint.x - (rect.width / 2) <= 0 ||
                    targetPositionScreenPoint.x + (rect.width / 2) >= Screen.width ||
@@ -33,7 +33,7 @@ namespace Objectives {
 
 
         private Vector3 HandleOffscreen(Vector3 targetPositionScreenPoint) {
-            var rect = pointerTransform.rect;
+            var rect = PointerTransform.rect;
             var clampedX = Mathf.Clamp(targetPositionScreenPoint.x, 0 + (rect.width / 2),
                 Screen.width - (rect.width / 2));
             var clampedY = Mathf.Clamp(targetPositionScreenPoint.y, 0 + (rect.height / 2),
@@ -42,7 +42,7 @@ namespace Objectives {
         }
 
         public void Cleanup() {
-            if (pointerTransform) Destroy(pointerTransform.gameObject);
+            if (PointerTransform) Destroy(PointerTransform.gameObject);
             Destroy(gameObject);
         }
 

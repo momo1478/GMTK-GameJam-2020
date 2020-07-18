@@ -1,6 +1,7 @@
 ﻿using System;
 using Safe_Zones;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Objectives {
@@ -20,6 +21,12 @@ namespace Objectives {
             if (safeZone.HasActivated() || safeZone == null) return;
             
             lapsedTime += Time.deltaTime;
+            
+            if (timeToComplete - lapsedTime <= 4 && !animating) {
+                TimeOutAnimation(safeZone.GetComponent<SpriteRenderer>());
+                TimeOutAnimation(safeZone.gameObject.GetComponent<Target>().PointerTransform.GetComponent<Image>());
+                animating = true;
+            }
         }
 
         public override bool IsCompleted()

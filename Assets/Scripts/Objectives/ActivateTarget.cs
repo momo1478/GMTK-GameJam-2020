@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Objectives {
@@ -22,6 +23,12 @@ namespace Objectives {
 
         private void Update() {
             lapsedTime += Time.deltaTime;
+            
+            if (timeToComplete - lapsedTime <= 4 && !animating) {
+                TimeOutAnimation(chargeStation.GetComponent<SpriteRenderer>());
+                TimeOutAnimation(chargeStation.gameObject.GetComponent<Target>().PointerTransform.GetComponent<Image>());
+                animating = true;
+            }
         }
 
         public override bool IsCompleted() => chargeStation?.Charged ?? false;
