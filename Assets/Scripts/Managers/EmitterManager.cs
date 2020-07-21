@@ -57,9 +57,10 @@ public class EmitterManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // private void OnGUI() {
+    //     GUILayout.Box("Time = " + Time.time.ToString());
+    //     GUILayout.Box("projectileSpeed = " + emitters[0].projectileSpeed.ToString());
+    //     GUILayout.Box("spawnRate = " + emitters[0].spawnRate.ToString());;
+    //     GUILayout.Box("behaviour = " + emitters[0].behavior);
+    // }
 }

@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class Emitter : MonoBehaviour
-{
-
-    public float spawnRate = 50;    // proj/sec
-    public float rotationRate = 100;  // degree/sec
+public class Emitter : MonoBehaviour {
+    public float spawnRate = 50; // proj/sec
+    public float rotationRate = 100; // degree/sec
     public float projectileSpeed = 5;
 
     public float angle = 0f;
@@ -18,8 +16,7 @@ public class Emitter : MonoBehaviour
 
     private GameObject player;
 
-    public enum Behavior
-    {
+    public enum Behavior {
         Spin,
         Random,
         Oscillate,
@@ -34,22 +31,18 @@ public class Emitter : MonoBehaviour
     private float tillNextAction = 0f;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    public static Vector3 GetVelocity(float speed, float degree)
-    {
+    public static Vector3 GetVelocity(float speed, float degree) {
         float radians = degree * (Mathf.PI / 180);
         return new Vector3(Mathf.Cos(radians), Mathf.Sin(radians), 0) * speed;
     }
 
-    public void SpawnBullet()
-    {
+    public void SpawnBullet() {
         Projectile clone = null;
-        switch (behavior)
-        {
+        switch (behavior) {
             case Behavior.Spin:
                 clone = Instantiate(projectile, transform.position, transform.rotation);
                 float spinOffset = Time.time * rotationRate % 360f;
@@ -57,48 +50,51 @@ public class Emitter : MonoBehaviour
                 break;
             case Behavior.Oscillate:
                 clone = Instantiate(projectile, transform.position, transform.rotation);
-                float offset =  Mathf.PingPong(Time.time * rotationRate, angleSpray);
-                clone.data = new Projectile.ProjectileData(GetVelocity(projectileSpeed, angle - angleSpray/2 + offset));
+                float offset = Mathf.PingPong(Time.time * rotationRate, angleSpray);
+                clone.data =
+                    new Projectile.ProjectileData(GetVelocity(projectileSpeed, angle - angleSpray / 2 + offset));
                 break;
             case Behavior.Pulse:
-                for (int i = 0; i < pulseSize; i++)
-                {
+                for (int i = 0; i < pulseSize; i++) {
                     clone = Instantiate(projectile, transform.position, transform.rotation);
                     float curAngle = angleSpray / pulseSize * i;
-                    clone.data = new Projectile.ProjectileData(GetVelocity(projectileSpeed, angle - angleSpray/2 + curAngle));
+                    clone.data =
+                        new Projectile.ProjectileData(GetVelocity(projectileSpeed, angle - angleSpray / 2 + curAngle));
                 }
+
                 break;
             case Behavior.Random:
                 clone = Instantiate(projectile, transform.position, transform.rotation);
-                float ranAngle = Random.Range(angle - angleSpray/2, angle + angleSpray/2);
+                float ranAngle = Random.Range(angle - angleSpray / 2, angle + angleSpray / 2);
                 clone.data = new Projectile.ProjectileData(GetVelocity(projectileSpeed, ranAngle));
                 break;
             case Behavior.Aimed:
                 clone = Instantiate(projectile, transform.position, transform.rotation);
-                var aimedVector = (Vector2)transform.position - ((Vector2)player.transform.position + (Random.insideUnitCircle * 5));
-                clone.data = new Projectile.ProjectileData(aimedVector.normalized * Random.Range(projectileSpeed, projectileSpeed * GameManager.GetScore()/200f));
+                var aimedVector = (Vector2) transform.position -
+                                  ((Vector2) player.transform.position + (Random.insideUnitCircle * 5));
+                clone.data = new Projectile.ProjectileData(aimedVector.normalized *
+                                                           Random.Range(projectileSpeed,
+                                                               projectileSpeed * GameManager.GetScore() / 200f));
                 break;
             default:
                 break;
         }
+
         clone.transform.SetParent(gameObject.transform);
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         float localRate = spawnRate;
-        if (behavior == Behavior.Pulse)
-        {
+        if (behavior == Behavior.Pulse) {
             localRate = localRate / pulseSize;
         }
-        if (tillNextAction > 1.0f / localRate)
-        {
+
+        if (tillNextAction > 1.0f / localRate) {
             SpawnBullet();
             tillNextAction = 0f;
         }
-        else
-        {
+        else {
             tillNextAction += Time.deltaTime;
         }
     }
