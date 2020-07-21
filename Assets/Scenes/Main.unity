@@ -2771,7 +2771,9 @@ MonoBehaviour:
   globalBehavior: 2
   globalSpeed: 5
   globalRate: 1
-  difficultyScalingConstant: 300
+  maxGlobalSpeed: 20
+  maxGlobalRate: 3
+  maxDifficultyTime: 150
   emitters: []
 --- !u!4 &1398481325
 Transform:

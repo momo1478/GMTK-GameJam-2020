@@ -14,11 +14,19 @@ public class EmitterManager : MonoBehaviour
 
     public Emitter.Behavior globalBehavior = Emitter.Behavior.Oscillate;
 
-    public float globalSpeed = 5;
-    public float globalRate = 50;
+    [Range(3f, 8f)]
+    public float globalSpeed;
+    [Range(0.75f, 1.25f)]
+    public float globalRate;
+    [Range(15f, 25f)]
+    public float maxGlobalSpeed;
+    [Range(2.75f, 3.5f)]
+    public float maxGlobalRate;
+    [Range(130f, 500f)]
+    public float maxDifficultyTime;
 
-    [Range(25f, 1000f)]
-    public float difficultyScalingConstant = 500f;
+    // [Range(25f, 1000f)]
+    // public float difficultyScalingConstant = 500f;
 
     public Emitter[] emitters;
 
@@ -28,6 +36,8 @@ public class EmitterManager : MonoBehaviour
         emitters = FindObjectsOfType<Emitter>();
         StartCoroutine(RandomizeEmitterBehavior());
     }
+    
+    
 
     private IEnumerator RandomizeEmitterBehavior()
     {
@@ -38,14 +48,16 @@ public class EmitterManager : MonoBehaviour
             foreach (var emitter in emitters)
             {
                 emitter.behavior = randomBehavior;
-                emitter.projectileSpeed = globalSpeed * (1 + (GameManager.GetScore() / difficultyScalingConstant));
-                emitter.spawnRate = globalRate * (1 + (GameManager.GetScore() / difficultyScalingConstant));
+                emitter.projectileSpeed = Mathf.Lerp(globalSpeed, maxGlobalSpeed, GetDifficulty());
+                emitter.spawnRate = Mathf.Lerp(globalRate, maxGlobalRate, GetDifficulty());
             }
             // set color
             GameManager.SetBackgroundColor(COLORS[UnityEngine.Random.Range(0, COLORS.Length)]);
             yield return new WaitForSeconds(5);
         }
     }
+
+    private float GetDifficulty() => Mathf.Clamp01((Time.time) / maxDifficultyTime);
 
     void OnValidate()
     {
@@ -58,7 +70,7 @@ public class EmitterManager : MonoBehaviour
     }
 
     // private void OnGUI() {
-    //     GUILayout.Box("Time = " + Time.time.ToString());
+    //     GUILayout.Box("GetDifficulty = " + GetDifficulty().ToString());
     //     GUILayout.Box("projectileSpeed = " + emitters[0].projectileSpeed.ToString());
     //     GUILayout.Box("spawnRate = " + emitters[0].spawnRate.ToString());;
     //     GUILayout.Box("behaviour = " + emitters[0].behavior);

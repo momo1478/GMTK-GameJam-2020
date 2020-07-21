@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 
 public class Emitter : MonoBehaviour {
-    public float spawnRate = 50; // proj/sec
+    public float spawnRate = 1; // proj/sec
     public float rotationRate = 100; // degree/sec
     public float projectileSpeed = 5;
 
@@ -73,8 +73,8 @@ public class Emitter : MonoBehaviour {
                 var aimedVector = (Vector2) transform.position -
                                   ((Vector2) player.transform.position + (Random.insideUnitCircle * 5));
                 clone.data = new Projectile.ProjectileData(aimedVector.normalized *
-                                                           Random.Range(projectileSpeed,
-                                                               projectileSpeed * GameManager.GetScore() / 200f));
+                                                           Random.Range(projectileSpeed- 2f,
+                                                               projectileSpeed + 2f));
                 break;
             default:
                 break;
