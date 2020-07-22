@@ -12,6 +12,8 @@ public class OptionsMenu : MonoBehaviour
     public UnityEvent onOpen;
     public UnityEvent onClose;
 
+    [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject headerText;
 
     void Start() {
         SetSliders();
@@ -47,12 +49,16 @@ public class OptionsMenu : MonoBehaviour
 
     public void Close()
     {
+        mainMenu.SetActive(true);
+        headerText.SetActive(true);
         SetActive(false);
         onClose.Invoke();
     }
 
     public void Open()
     {
+        mainMenu.SetActive(false);
+        headerText.SetActive(false);
         SetActive(true);
         onOpen.Invoke();
     }
