@@ -4,15 +4,15 @@ using UnityEngine;
 using UnityEditor;
 
 public class Emitter : MonoBehaviour {
-    public float spawnRate = 1; // proj/sec
+    public float spawnRate; // proj/sec
     public float rotationRate = 100; // degree/sec
-    public float projectileSpeed = 5;
+    public float projectileSpeed;
 
     public float angle = 0f;
     public float angleSpray = 45f;
 
     // Pulse
-    public float pulseSize = 10;
+    public float pulseSize;
 
     private GameObject player;
 

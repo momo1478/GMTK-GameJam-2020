@@ -18,10 +18,14 @@ public class EmitterManager : MonoBehaviour
     public float globalSpeed;
     [Range(0.75f, 1.25f)]
     public float globalRate;
+    [Range(1f, 3f)] 
+    public float globalPulseSize;
     [Range(15f, 25f)]
     public float maxGlobalSpeed;
     [Range(2.75f, 3.5f)]
     public float maxGlobalRate;
+    [Range(5f, 10f)]
+    public float maxPulseSize;
     [Range(130f, 500f)]
     public float maxDifficultyTime;
 
@@ -45,11 +49,13 @@ public class EmitterManager : MonoBehaviour
         {
             Array values = Emitter.Behavior.GetValues(typeof(Emitter.Behavior));
             Emitter.Behavior randomBehavior = (Emitter.Behavior)values.GetValue(UnityEngine.Random.Range(0, values.Length));
+            
             foreach (var emitter in emitters)
             {
                 emitter.behavior = randomBehavior;
                 emitter.projectileSpeed = Mathf.Lerp(globalSpeed, maxGlobalSpeed, GetDifficulty());
                 emitter.spawnRate = Mathf.Lerp(globalRate, maxGlobalRate, GetDifficulty());
+                emitter.pulseSize = Mathf.Lerp(globalPulseSize, maxPulseSize, GetDifficulty());
             }
             // set color
             GameManager.SetBackgroundColor(COLORS[UnityEngine.Random.Range(0, COLORS.Length)]);
@@ -69,10 +75,10 @@ public class EmitterManager : MonoBehaviour
         }
     }
 
-    // private void OnGUI() {
-    //     GUILayout.Box("GetDifficulty = " + GetDifficulty().ToString());
-    //     GUILayout.Box("projectileSpeed = " + emitters[0].projectileSpeed.ToString());
-    //     GUILayout.Box("spawnRate = " + emitters[0].spawnRate.ToString());;
-    //     GUILayout.Box("behaviour = " + emitters[0].behavior);
-    // }
+    private void OnGUI() {
+        GUILayout.Box("GetDifficulty = " + GetDifficulty().ToString());
+        GUILayout.Box("projectileSpeed = " + emitters[0].projectileSpeed.ToString());
+        GUILayout.Box("spawnRate = " + emitters[0].spawnRate.ToString());;
+        GUILayout.Box("behaviour = " + emitters[0].behavior);
+    }
 }

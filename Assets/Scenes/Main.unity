@@ -2771,8 +2771,10 @@ MonoBehaviour:
   globalBehavior: 2
   globalSpeed: 5
   globalRate: 1
+  globalPulseSize: 2
   maxGlobalSpeed: 20
   maxGlobalRate: 3
+  maxPulseSize: 8
   maxDifficultyTime: 150
   emitters: []
 --- !u!4 &1398481325
