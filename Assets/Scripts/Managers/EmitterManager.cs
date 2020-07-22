@@ -74,11 +74,4 @@ public class EmitterManager : MonoBehaviour
             emitter.behavior = globalBehavior;
         }
     }
-
-    private void OnGUI() {
-        GUILayout.Box("GetDifficulty = " + GetDifficulty().ToString());
-        GUILayout.Box("projectileSpeed = " + emitters[0].projectileSpeed.ToString());
-        GUILayout.Box("spawnRate = " + emitters[0].spawnRate.ToString());;
-        GUILayout.Box("behaviour = " + emitters[0].behavior);
-    }
 }
